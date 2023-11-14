@@ -1,0 +1,28 @@
+﻿<Window
+	x:Class="HotDeal.Views.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:prism="http://prismlibrary.com/"
+	Width="1280"
+	Height="720"
+	prism:ViewModelLocator.AutoWireViewModel="True"
+	WindowStyle="None">
+	<WindowChrome.WindowChrome>
+		<WindowChrome
+			CaptionHeight="0"
+			CornerRadius="0"
+			GlassFrameThickness="0"
+			NonClientFrameEdges="None"
+			ResizeBorderThickness="5"
+			UseAeroCaptionButtons="False" />
+	</WindowChrome.WindowChrome>
+	<Border Background="{StaticResource DefaultBackground}">
+		<StackPanel>
+			<ContentControl prism:RegionManager.RegionName="TitleRegion" MouseDown="Window_MouseDown" />
+			<StackPanel Orientation="Horizontal">
+				<ContentControl prism:RegionManager.RegionName="MainMenuRegion" />
+				<ContentControl prism:RegionManager.RegionName="ContentRegion" />
+			</StackPanel>
+		</StackPanel>
+	</Border>
+</Window>
