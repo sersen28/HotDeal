@@ -43,13 +43,18 @@ namespace HotDeal.Services
 					var price = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
 					var discount = iter.FindElement(By.ClassName("rate")).GetAttribute("innerHTML");
 
-					this.DanawaItems.Add(new DanawaItem(description, price, discount, img));
+					this.DanawaItems.Add(new DanawaItem(ReplaceDescription(description), price, discount, img));
 				}
 				catch(Exception e) {
 					Debug.WriteLine($"({nameof(InitDanawaHotDeal)})"+e.Message);
 					continue;
 				}
 			}
+		}
+
+		private string ReplaceDescription(string description)
+		{
+			return description.Replace("<br>", "\n");
 		}
 	}
 }

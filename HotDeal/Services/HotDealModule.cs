@@ -13,6 +13,7 @@ namespace HotDeal.Services
 			var regionManager = containerProvider.Resolve<RegionManager>();
 			regionManager.RegisterViewWithRegion("TitleRegion", typeof(TitleView));
 			regionManager.RegisterViewWithRegion("MainMenuRegion", typeof(MainMenuView));
+			regionManager.RegisterViewWithRegion("ContentRegion", typeof(DanawaView));
 		}
 
 		public void RegisterTypes(IContainerRegistry containerRegistry)
@@ -20,6 +21,7 @@ namespace HotDeal.Services
 			containerRegistry.RegisterForNavigation<MainWindow, MainWindowViewModel>();
 			containerRegistry.RegisterForNavigation<TitleView, TitleViewModel>();
 			containerRegistry.RegisterForNavigation<MainMenuView, MainMenuViewModel>();
+			containerRegistry.RegisterForNavigation<DanawaView, DanawaViewModel>();
 		}
 	}
 }

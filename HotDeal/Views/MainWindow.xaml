@@ -17,12 +17,29 @@
 			UseAeroCaptionButtons="False" />
 	</WindowChrome.WindowChrome>
 	<Border Background="{StaticResource DefaultBackground}">
-		<StackPanel>
-			<ContentControl prism:RegionManager.RegionName="TitleRegion" MouseDown="Window_MouseDown" />
-			<StackPanel Orientation="Horizontal">
-				<ContentControl prism:RegionManager.RegionName="MainMenuRegion" />
-				<ContentControl prism:RegionManager.RegionName="ContentRegion" />
-			</StackPanel>
-		</StackPanel>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<ContentControl
+				Grid.Row="0"
+				Grid.ColumnSpan="3"
+				prism:RegionManager.RegionName="TitleRegion"
+				MouseDown="Window_MouseDown" />
+			<ContentControl
+				Grid.Row="1"
+				Grid.Column="0"
+				prism:RegionManager.RegionName="MainMenuRegion" />
+			<ContentControl
+				Grid.Row="1"
+				Grid.Column="1"
+				prism:RegionManager.RegionName="ContentRegion" />
+		</Grid>
 	</Border>
 </Window>
