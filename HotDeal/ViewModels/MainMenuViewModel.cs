@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using HotDeal.Services;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,8 @@ namespace HotDeal.ViewModels
 {
 	public class MainMenuViewModel : BindableBase
 	{
-		public MainMenuViewModel()
+	
+		public MainMenuViewModel(WebCrawlingService webCrawlingService)
 		{
 
 		}

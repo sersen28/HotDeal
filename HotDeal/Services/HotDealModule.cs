@@ -12,12 +12,14 @@ namespace HotDeal.Services
 		{
 			var regionManager = containerProvider.Resolve<RegionManager>();
 			regionManager.RegisterViewWithRegion("TitleRegion", typeof(TitleView));
+			regionManager.RegisterViewWithRegion("MainMenuRegion", typeof(MainMenuView));
 		}
 
 		public void RegisterTypes(IContainerRegistry containerRegistry)
 		{
 			containerRegistry.RegisterForNavigation<MainWindow, MainWindowViewModel>();
 			containerRegistry.RegisterForNavigation<TitleView, TitleViewModel>();
+			containerRegistry.RegisterForNavigation<MainMenuView, MainMenuViewModel>();
 		}
 	}
 }
