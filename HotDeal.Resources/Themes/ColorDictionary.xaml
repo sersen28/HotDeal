@@ -12,4 +12,8 @@
 
 	<SolidColorBrush x:Key="DefaultPoint" Color="#4e9f3d" />
 	<SolidColorBrush x:Key="DefaultPointDark" Color="#1e5128" />
+
+
+	<SolidColorBrush x:Key="SliderBackground" Color="#252525" />
+
 </ResourceDictionary>
