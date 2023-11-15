@@ -96,6 +96,7 @@ namespace HotDeal.Resources.Themes
 			styles = new Dictionary<string, ResourceDictionary>();
 			styles.Add("CommonDictionary".ToLower(), new ResourceDictionary() { Source = GetAbsoluteUri("CommonDictionary.xaml") });
 			styles.Add("ColorDictionary".ToLower(), new ResourceDictionary() { Source = GetAbsoluteUri("ColorDictionary.xaml") });
+			styles.Add("FontDictionary".ToLower(), new ResourceDictionary() { Source = GetAbsoluteUri("FontDictionary.xaml") });
 			var asm = Assembly.GetExecutingAssembly();
 			Stream stream = asm.GetManifestResourceStream(asm.GetName().Name + ".g.resources");
 			using (var reader = new ResourceReader(stream))

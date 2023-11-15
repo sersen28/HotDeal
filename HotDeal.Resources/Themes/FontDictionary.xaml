@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<FontFamily x:Key="NotoBlack">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR Black</FontFamily>
+	<FontFamily x:Key="NotoBold">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR Bold</FontFamily>
+	<FontFamily x:Key="NotoExtraBold">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR ExtraBold</FontFamily>
+	<FontFamily x:Key="NotoExtraLight">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR ExtraLight</FontFamily>
+	<FontFamily x:Key="NotoLight">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR Light</FontFamily>
+	<FontFamily x:Key="NotoMedium">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR Medium</FontFamily>
+	<FontFamily x:Key="NotoRegular">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR Regular</FontFamily>
+	<FontFamily x:Key="NotoSemiBold">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR SemiBold</FontFamily>
+	<FontFamily x:Key="NotoThin">pack://application:,,,/HotDeal.Resources;Component/Resources/Fonts/#Noto Sans KR Thin</FontFamily>
+</ResourceDictionary>
