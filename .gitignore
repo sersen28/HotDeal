@@ -3,3 +3,5 @@ HotDeal.Resources/obj/
 HotDeal/bin/
 HotDeal/obj/
 .vs/
+
+*.csproj.user
