@@ -6,6 +6,7 @@
 	xmlns:items="clr-namespace:HotDeal.Items"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:prism="http://prismlibrary.com/"
+	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
 	<Grid>
@@ -20,9 +21,9 @@
 			VirtualizingPanel.ScrollUnit="Pixel">
 			<ListBox.Template>
 				<ControlTemplate>
-					<ScrollViewer VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+					<units:ListScrollViewer>
 						<ItemsPresenter />
-					</ScrollViewer>
+					</units:ListScrollViewer>
 				</ControlTemplate>
 			</ListBox.Template>
 			<ItemsControl.ItemTemplate>

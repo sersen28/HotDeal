@@ -6,6 +6,7 @@
 	Width="1280"
 	Height="720"
 	prism:ViewModelLocator.AutoWireViewModel="True"
+	ResizeMode="NoResize"
 	WindowStyle="None">
 	<WindowChrome.WindowChrome>
 		<WindowChrome

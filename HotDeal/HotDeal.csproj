@@ -15,4 +15,9 @@
   <ItemGroup>
     <ProjectReference Include="..\HotDeal.Resources\HotDeal.Resources.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Items\DanawaListItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

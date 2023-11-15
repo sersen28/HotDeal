@@ -7,6 +7,9 @@
 	<SolidColorBrush x:Key="DefaultBorderBrush" Color="#141414" />
 	<SolidColorBrush x:Key="DefaultForeground" Color="#f0f0f0" />
 
-	<SolidColorBrush x:Key="ButtonMouseOver" Color="#be3144" />
-	<SolidColorBrush x:Key="ButtonMousePressed" Color="#872341" />
+	<SolidColorBrush x:Key="ButtonMouseOver" Color="#4e9f3d" />
+	<SolidColorBrush x:Key="ButtonMousePressed" Color="#1e5128" />
+
+	<SolidColorBrush x:Key="DefaultPoint" Color="#4e9f3d" />
+	<SolidColorBrush x:Key="DefaultPointDark" Color="#1e5128" />
 </ResourceDictionary>
