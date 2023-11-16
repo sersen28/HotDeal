@@ -1,16 +1,12 @@
 ﻿using HotDeal.Resources.Models;
 using HotDeal.Services;
-using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using Reactive.Bindings;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 
 namespace HotDeal.ViewModels
 {
-	public class FilterSettingViewModel : BindableBase
+	public class FilterSettingViewModel : BindableBase, INavigationAware
 	{
 		private readonly UserService _UserService;
 
@@ -36,6 +32,30 @@ namespace HotDeal.ViewModels
 					max: this.MaximumPrice.Value
 				);
 			});
+			
+			Initialize();
+		}
+
+		private void Initialize()
+		{
+			this.Discount.Value = this.UserFilter.Value.Discount.Value;
+			this.MinimumPrice.Value = this.UserFilter.Value.MinimumPrice.Value;
+			this.MaximumPrice.Value = this.UserFilter.Value.MaximumPrice.Value;
+		}
+
+		public void OnNavigatedTo(NavigationContext navigationContext)
+		{
+			Initialize();
+		}
+
+		public bool IsNavigationTarget(NavigationContext navigationContext)
+		{
+			return true;
+		}
+
+		public void OnNavigatedFrom(NavigationContext navigationContext)
+		{
+			Initialize();
 		}
 	}
 }
