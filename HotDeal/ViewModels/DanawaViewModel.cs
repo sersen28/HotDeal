@@ -17,13 +17,14 @@ namespace HotDeal.ViewModels
 
 		public ReadOnlyReactiveCollection<DanawaItem> DanawaList { get; set; }
 
-		public ReactivePropertySlim<bool> IsLoading { get; set; } = new(true);
+		public ReadOnlyReactivePropertySlim<bool> IsLoading { get; set; }
 
 		public DanawaViewModel(WebCrawlingService webCrawlingService, UserService userService)
 		{
 			this._webCrawlingService = webCrawlingService;
 			this._UserService = userService;
 
+			this.IsLoading = _webCrawlingService.IsLoading.ToReadOnlyReactivePropertySlim();
 			this.DanawaList = _webCrawlingService.DanawaItems.ToReadOnlyReactiveCollection();
 		}
 	}

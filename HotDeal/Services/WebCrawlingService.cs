@@ -1,6 +1,7 @@
 ﻿using HotDeal.Resources.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools.V117.CSS;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace HotDeal.Services
 
 		public ReactiveCollection<DanawaItem> DanawaItems = new();
 
+		public ReactivePropertySlim<bool> IsLoading { get; set; } = new(true);
+
 		public WebCrawlingService() 
 		{
 			var driverService = ChromeDriverService.CreateDefaultService();
@@ -32,6 +35,7 @@ namespace HotDeal.Services
 
 		private void InitDanawaHotDeal()
 		{
+			this.IsLoading.Value = true;
 			_driver.Navigate().GoToUrl("https://www.danawa.com");
 			var prod_list = _driver.FindElements(By.XPath("//*[@id=\"cmPickLayer\"]/div[2]/div[2]/div/ul/li"));
 			foreach (var iter in prod_list)
@@ -50,6 +54,7 @@ namespace HotDeal.Services
 					continue;
 				}
 			}
+			this.IsLoading.Value = false;
 		}
 
 		private string ReplaceDescription(string description)

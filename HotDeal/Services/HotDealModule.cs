@@ -14,7 +14,6 @@ namespace HotDeal.Services
 			regionManager.RegisterViewWithRegion("TitleRegion", typeof(TitleView));
 			regionManager.RegisterViewWithRegion("MainMenuRegion", typeof(MainMenuView));
 			regionManager.RegisterViewWithRegion("ContentRegion", typeof(DanawaView));
-			regionManager.RegisterViewWithRegion("FilterRegion", typeof(FilterSettingView));
 		}
 
 		public void RegisterTypes(IContainerRegistry containerRegistry)

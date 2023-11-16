@@ -25,34 +25,26 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<ContentControl
 				Grid.Row="0"
-				Grid.ColumnSpan="3"
+				Grid.ColumnSpan="2"
+				d:Height="70"
 				prism:RegionManager.RegionName="TitleRegion"
 				MouseDown="Window_MouseDown" />
 			<ContentControl
 				Grid.Row="1"
-				Grid.RowSpan="2"
 				Grid.Column="0"
 				d:Width="100"
 				prism:RegionManager.RegionName="MainMenuRegion" />
 			<ContentControl
 				Grid.Row="1"
-				Grid.RowSpan="2"
 				Grid.Column="1"
 				prism:RegionManager.RegionName="ContentRegion" />
-			<ContentControl
-				Grid.Row="2"
-				Grid.Column="2"
-				d:Height="150"
-				prism:RegionManager.RegionName="FilterRegion" />
 		</Grid>
 	</Border>
 </Window>
