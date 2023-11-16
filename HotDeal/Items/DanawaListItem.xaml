@@ -25,15 +25,15 @@
 			</Grid.RowDefinitions>
 			<Border
 				Grid.RowSpan="3"
-				Width="120"
-				Height="120"
-				Margin="3,3,11,3"
+				Width="90"
+				Height="90"
+				Margin="5,5,15,5"
 				Background="{StaticResource DefaultBorderBrush}"
 				CornerRadius="8" />
 			<Image
 				Grid.RowSpan="3"
-				Width="120"
-				Height="120"
+				Width="90"
+				Height="90"
 				Margin="3,3,11,3"
 				Source="{Binding ImgSource.Value, IsAsync=True}"
 				Stretch="Uniform" />
@@ -42,7 +42,7 @@
 				Grid.Column="1"
 				d:Text="TESTTESTTEST&#10;TEST"
 				FontFamily="{StaticResource NotoMedium}"
-				FontSize="24"
+				FontSize="18"
 				Foreground="White"
 				Text="{Binding Description.Value}" />
 			<TextBlock
@@ -50,7 +50,7 @@
 				Grid.Column="1"
 				d:Text="TESTTESTTEST"
 				FontFamily="{StaticResource NotoRegular}"
-				FontSize="24"
+				FontSize="16"
 				Foreground="White"
 				Text="{Binding Price.Value}" />
 			<TextBlock
@@ -58,7 +58,7 @@
 				Grid.Column="1"
 				d:Text="TESTTESTTEST"
 				FontFamily="{StaticResource NotoRegular}"
-				FontSize="24"
+				FontSize="16"
 				Foreground="White"
 				Text="{Binding Discount.Value}" />
 		</Grid>

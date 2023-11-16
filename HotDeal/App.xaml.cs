@@ -24,6 +24,7 @@ namespace HotDeal
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
 			containerRegistry.RegisterSingleton<WebCrawlingService>();
+			containerRegistry.RegisterSingleton<UserService>();
 		}
 	}
 }

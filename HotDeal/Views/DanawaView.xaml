@@ -2,6 +2,7 @@
 	x:Class="HotDeal.Views.DanawaView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:cvt="clr-namespace:HotDeal.Resources.Converters;assembly=HotDeal.Resources"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:items="clr-namespace:HotDeal.Items"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,6 +10,9 @@
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
+	<UserControl.Resources>
+		<cvt:BooleanToVisibilityCoverter x:Key="BooleanToVisibilityCoverter" />
+	</UserControl.Resources>
 	<Grid>
 		<ListView
 			d:ItemsSource="{d:SampleData ItemCount=4}"
@@ -32,5 +36,19 @@
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ListView>
+		<Border
+			Margin="5"
+			Background="{StaticResource ItemBackground}"
+			CornerRadius="12"
+			Visibility="{Binding IsLoading.Value, Converter={StaticResource BooleanToVisibilityCoverter}}">
+			<TextBlock
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				FontFamily="{StaticResource NotoMedium}"
+				FontSize="36"
+				Foreground="{StaticResource DefaultForeground}"
+				Text="Loading.."
+				TextAlignment="Center" />
+		</Border>
 	</Grid>
 </UserControl>

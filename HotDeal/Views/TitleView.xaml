@@ -6,18 +6,29 @@
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True">
 	<Grid Margin="0" Background="{StaticResource TitleBackground}">
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition />
+		</Grid.RowDefinitions>
 		<TextBlock
+			Grid.Row="0"
 			Margin="16,0,0,0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Center"
 			FontSize="16"
-			FontWeight="Bold"
+			FontWeight="Medium"
 			Foreground="{StaticResource DefaultForeground}"
 			Text="{Binding Title.Value}" />
 		<units:CloseButton
+			Grid.Row="0"
 			Width="36"
 			Height="36"
 			HorizontalAlignment="Right"
 			Background="Transparent" />
+		<Rectangle
+			Grid.Row="1"
+			Height="4"
+			HorizontalAlignment="Stretch"
+			Fill="{StaticResource DefaultForeground}" />
 	</Grid>
 </UserControl>
