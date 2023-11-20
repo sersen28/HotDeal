@@ -9,16 +9,9 @@
 	Height="720"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	ResizeMode="NoResize"
-	WindowStyle="None"
 	mc:Ignorable="d">
 	<WindowChrome.WindowChrome>
-		<WindowChrome
-			CaptionHeight="0"
-			CornerRadius="0"
-			GlassFrameThickness="0"
-			NonClientFrameEdges="None"
-			ResizeBorderThickness="5"
-			UseAeroCaptionButtons="False" />
+		<WindowChrome CaptionHeight="34" />
 	</WindowChrome.WindowChrome>
 	<Border Background="{StaticResource DefaultBackground}">
 		<Grid>
@@ -34,8 +27,7 @@
 				Grid.Row="0"
 				Grid.ColumnSpan="2"
 				d:Height="70"
-				prism:RegionManager.RegionName="TitleRegion"
-				MouseDown="Window_MouseDown" />
+				prism:RegionManager.RegionName="TitleRegion" />
 			<ContentControl
 				Grid.Row="1"
 				Grid.Column="0"
