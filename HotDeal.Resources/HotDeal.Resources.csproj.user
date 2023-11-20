@@ -17,5 +17,8 @@
     <Page Update="Themes\Units\ListScrollViewer.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\Units\MenuButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>
