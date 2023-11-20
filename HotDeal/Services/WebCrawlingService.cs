@@ -1,27 +1,29 @@
 ﻿using HotDeal.Resources.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools.V117.CSS;
 using Reactive.Bindings;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotDeal.Services
 {
 	public class WebCrawlingService
 	{
+		private readonly UserService _UserService;
 		private ChromeDriver _driver;
 
-		public ReactiveCollection<DanawaItem> DanawaItems = new();
+		public ReactiveCollection<DanawaItem> DanawaItems { get; set; } = new();
+		public ReactiveCollection<DanawaItem> DanawaFilterItems { get; set; } = new();
 
 		public ReactivePropertySlim<bool> IsLoading { get; set; } = new(true);
+		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
 
-		public WebCrawlingService() 
+		public WebCrawlingService(UserService userService) 
 		{
+			this._UserService = userService;
+			this.UserFilter = this._UserService.UserFilter.ToReadOnlyReactiveProperty();
+
 			var driverService = ChromeDriverService.CreateDefaultService();
 			driverService.HideCommandPromptWindow = true;
 
@@ -44,10 +46,18 @@ namespace HotDeal.Services
 				{
 					var img = iter.FindElement(By.TagName("img")).GetAttribute("src");
 					var description = iter.FindElement(By.ClassName("prod-list__txt")).GetAttribute("innerHTML");
-					var price = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
-					var discount = iter.FindElement(By.ClassName("rate")).GetAttribute("innerHTML");
+					var price_str = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
+					var discount_str = iter.FindElement(By.ClassName("rate")).GetAttribute("innerHTML");
 
-					this.DanawaItems.Add(new DanawaItem(ReplaceDescription(description), price, discount, img));
+					if (ulong.TryParse(price_str.Replace(",",""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
+					{
+						var item = new DanawaItem(ReplaceDescription(description), price, discount, img);
+						this.DanawaItems.Add(item);
+						if (DanawaItemFilter(item))
+						{
+							this.DanawaFilterItems.Add(item);
+						}
+					}
 				}
 				catch(Exception e) {
 					Debug.WriteLine($"({nameof(InitDanawaHotDeal)})"+e.Message);
@@ -55,6 +65,18 @@ namespace HotDeal.Services
 				}
 			}
 			this.IsLoading.Value = false;
+		}
+
+		private bool DanawaItemFilter(DanawaItem item)
+		{
+			var filter = this.UserFilter.Value;
+			if (item.Discount.Value < filter.Discount.Value
+				|| item.Price.Value < filter.MinimumPrice.Value
+				|| item.Price.Value > filter.MaximumPrice.Value)
+			{
+				return false;
+			}
+			return true;
 		}
 
 		private string ReplaceDescription(string description)

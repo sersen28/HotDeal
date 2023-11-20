@@ -8,9 +8,8 @@ using System.Linq;
 namespace HotDeal.ViewModels
 {
 	public class MainMenuViewModel : BindableBase
-	{
-	
-		public MainMenuViewModel(WebCrawlingService webCrawlingService)
+	{	
+		public MainMenuViewModel()
 		{
 
 		}

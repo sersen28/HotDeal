@@ -54,7 +54,7 @@
 			Background="Transparent"
 			BorderThickness="0"
 			IsTabStop="False"
-			ItemsSource="{Binding DanawaList}"
+			ItemsSource="{Binding DanawaFilterList}"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Visible"
 			VirtualizingPanel.ScrollUnit="Pixel">
@@ -65,17 +65,6 @@
 					</units:ListScrollViewer>
 				</ControlTemplate>
 			</ListBox.Template>
-			<ListView.ItemContainerStyle>
-				<Style TargetType="{x:Type ListViewItem}">
-					<Setter Property="Template">
-						<Setter.Value>
-							<ControlTemplate TargetType="{x:Type ListBoxItem}">
-								<ContentPresenter />
-							</ControlTemplate>
-						</Setter.Value>
-					</Setter>
-				</Style>
-			</ListView.ItemContainerStyle>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<items:DanawaListItem />
