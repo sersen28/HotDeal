@@ -8,7 +8,6 @@
 	Width="1280"
 	Height="720"
 	prism:ViewModelLocator.AutoWireViewModel="True"
-	ResizeMode="NoResize"
 	mc:Ignorable="d">
 	<WindowChrome.WindowChrome>
 		<WindowChrome CaptionHeight="34" />
