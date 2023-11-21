@@ -85,7 +85,7 @@
 				FontFamily="{StaticResource NotoMedium}"
 				FontSize="36"
 				Foreground="{StaticResource DefaultForeground}"
-				Text="Loading.."
+				Text="D Loading.."
 				TextAlignment="Center" />
 		</Border>
 	</Grid>

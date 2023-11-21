@@ -9,8 +9,8 @@ namespace HotDeal.ViewModels
 	{
 		private readonly WebCrawlingService _webCrawlingService;
 
-		public ReadOnlyReactiveCollection<DanawaItem> DanawaList { get; set; }
-		public ReadOnlyReactiveCollection<DanawaItem> DanawaFilterList { get; set; }
+		public ReadOnlyReactiveCollection<DanawaModel> DanawaList { get; set; }
+		public ReadOnlyReactiveCollection<DanawaModel> DanawaFilterList { get; set; }
 
 		public ReadOnlyReactivePropertySlim<bool> IsLoading { get; set; }
 
@@ -18,7 +18,7 @@ namespace HotDeal.ViewModels
 		{
 			this._webCrawlingService = webCrawlingService;
 
-			this.IsLoading = _webCrawlingService.IsLoading.ToReadOnlyReactivePropertySlim();
+			this.IsLoading = _webCrawlingService.IsDanawaLoading.ToReadOnlyReactivePropertySlim();
 			this.DanawaList = _webCrawlingService.DanawaItems.ToReadOnlyReactiveCollection();
 			this.DanawaFilterList = _webCrawlingService.DanawaFilterItems.ToReadOnlyReactiveCollection();
 		}
