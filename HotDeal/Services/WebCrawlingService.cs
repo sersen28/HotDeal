@@ -16,6 +16,9 @@ namespace HotDeal.Services
 		public ReactiveCollection<DanawaItem> DanawaItems { get; set; } = new();
 		public ReactiveCollection<DanawaItem> DanawaFilterItems { get; set; } = new();
 
+		public ReactiveCollection<DanawaItem> EleventhItems { get; set; } = new();
+		public ReactiveCollection<DanawaItem> EleventhFilterItems { get; set; } = new();
+
 		public ReactivePropertySlim<bool> IsLoading { get; set; } = new(true);
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
 
@@ -32,7 +35,41 @@ namespace HotDeal.Services
 			opt.AddArgument("headless");
 
 			_driver = new ChromeDriver(driverService, opt);
-			Task.Run(InitDanawaHotDeal);
+			Task.Run(() => {
+				InitTmonHotDeal();
+				InitGmarketHotDeal();
+				InitDanawaHotDeal();
+			});
+		}
+
+		private void InitTmonHotDeal()
+		{
+			_driver.Navigate().GoToUrl("https://www.tmon.co.kr/planning/PLAN_elVpHLluqf");
+			var list = _driver.FindElements(By.XPath("//*[@id=\"planContent\"]/div/div/div[2]/div[2]/div/ul/li"));
+
+
+		}
+
+		private void InitGmarketHotDeal()
+		{
+			_driver.Navigate().GoToUrl("https://www.gmarket.co.kr/n/superdeal");
+			var list = _driver.FindElements(By.XPath("//*[@id=\"container\"]/div[2]/ul/li"));
+
+			foreach (var iter in list)
+			{
+				try
+				{
+					var img = iter.FindElement(By.ClassName("thumb_image")).GetAttribute("src");
+					var description = iter.FindElement(By.ClassName("prod-list__txt")).GetAttribute("innerHTML");
+					var price_str = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
+					var discount_str = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine($"({nameof(InitGmarketHotDeal)})" + e.Message);
+					continue;
+				}
+			}
 		}
 
 		private void InitDanawaHotDeal()

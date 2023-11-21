@@ -25,6 +25,7 @@ namespace HotDeal
 		{
 			containerRegistry.RegisterSingleton<WebCrawlingService>();
 			containerRegistry.RegisterSingleton<UserService>();
+			containerRegistry.RegisterSingleton<LayoutService>();
 		}
 	}
 }

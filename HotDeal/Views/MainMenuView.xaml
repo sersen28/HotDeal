@@ -8,10 +8,18 @@
 	<Grid>
 		<StackPanel VerticalAlignment="top">
 			<units:MenuButton
+				Command="{Binding DanawaCommand}"
 				Content="다나와"
 				GroupName="MainMenuGroup"
 				IsChecked="True" />
-			<units:MenuButton Content="쿠팡" GroupName="MainMenuGroup" />
+			<units:MenuButton
+				Command="{Binding GmarketCommand}"
+				Content="지마켓"
+				GroupName="MainMenuGroup" />
+			<units:MenuButton
+				Command="{Binding TmonCommand}"
+				Content="티몬"
+				GroupName="MainMenuGroup" />
 		</StackPanel>
 		<StackPanel VerticalAlignment="Bottom">
 			<units:MenuButton Content="장바구니" GroupName="MainMenuGroup" />
