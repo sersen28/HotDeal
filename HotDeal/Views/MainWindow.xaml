@@ -11,7 +11,7 @@
 	ResizeMode="NoResize"
 	mc:Ignorable="d">
 	<WindowChrome.WindowChrome>
-		<WindowChrome CaptionHeight="34" CornerRadius="0" />
+		<WindowChrome CaptionHeight="34" />
 	</WindowChrome.WindowChrome>
 	<Border Background="{StaticResource DefaultBackground}">
 		<Grid>
