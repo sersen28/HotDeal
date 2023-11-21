@@ -48,19 +48,21 @@
 			<TextBlock
 				Grid.Row="1"
 				Grid.Column="1"
-				d:Text="TESTTESTTEST"
 				FontFamily="{StaticResource NotoRegular}"
 				FontSize="16"
-				Foreground="White"
-				Text="{Binding Price.Value}" />
+				Foreground="White">
+				<Run d:Text="00,000" Text="{Binding Price.Value, StringFormat={}{0:#,#}}" />
+				<Run Text="원" />
+			</TextBlock>
 			<TextBlock
 				Grid.Row="2"
 				Grid.Column="1"
-				d:Text="TESTTESTTEST"
 				FontFamily="{StaticResource NotoRegular}"
 				FontSize="16"
-				Foreground="White"
-				Text="{Binding Discount.Value}" />
+				Foreground="White">
+				<Run d:Text="00" Text="{Binding Discount.Value}" />
+				<Run Text="%" />
+			</TextBlock>
 		</Grid>
 	</Border>
 </ContentControl>

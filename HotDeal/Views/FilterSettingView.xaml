@@ -8,8 +8,13 @@
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
-	<StackPanel>
+	<Grid Margin="0,16,16,0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
 		<Border
+			Grid.Column="0"
 			Margin="10,0,10,10"
 			d:Width="600"
 			Background="{StaticResource ItemBackground}"
@@ -243,7 +248,10 @@
 				</Grid>
 			</Grid>
 		</Border>
-		<Button Command="{Binding SubmitCommand}">
+		<Button
+			Grid.Column="1"
+			MinWidth="140"
+			Command="{Binding SubmitCommand}">
 			<Button.Template>
 				<ControlTemplate TargetType="{x:Type Button}">
 					<Border
@@ -258,6 +266,7 @@
 							Grid.Column="0"
 							Margin="0,12,0,12"
 							HorizontalAlignment="Stretch"
+							VerticalAlignment="Center"
 							FontFamily="{StaticResource NotoMedium}"
 							FontSize="18"
 							Foreground="{StaticResource DefaultForeground}"
@@ -277,5 +286,5 @@
 				</ControlTemplate>
 			</Button.Template>
 		</Button>
-	</StackPanel>
+	</Grid>
 </UserControl>
