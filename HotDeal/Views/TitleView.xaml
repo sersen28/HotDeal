@@ -2,9 +2,14 @@
 	x:Class="HotDeal.Views.TitleView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:cvt="clr-namespace:HotDeal.Resources.Converters;assembly=HotDeal.Resources"
 	xmlns:prism="http://prismlibrary.com/"
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True">
+	<UserControl.Resources>
+		<cvt:RestoreBtnVisibilityConverter x:Key="RestoreBtnVisibilityConverter" />
+		<cvt:MaximizeBtnVisibilityConverter x:Key="MaximizeBtnVisibilityConverter" />
+	</UserControl.Resources>
 	<Grid Margin="0" Background="{StaticResource TitleBackground}">
 		<Grid.RowDefinitions>
 			<RowDefinition />
@@ -15,16 +20,43 @@
 			Margin="16,0,0,0"
 			HorizontalAlignment="Left"
 			VerticalAlignment="Center"
+			FontFamily="{StaticResource NotoMedium}"
 			FontSize="16"
 			FontWeight="Medium"
 			Foreground="{StaticResource DefaultForeground}"
 			Text="{Binding Title.Value}" />
-		<units:CloseButton
-			Grid.Row="0"
-			Width="36"
-			Height="36"
-			HorizontalAlignment="Right"
-			Background="Transparent" />
+		<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+			<units:TitleButton
+				Grid.Row="0"
+				Width="36"
+				Height="36"
+				Command="{Binding MinimizeCommand}"
+				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+				Content="&#xE949;" />
+			<units:TitleButton
+				Grid.Row="0"
+				Width="36"
+				Height="36"
+				Command="{Binding RestoreCommand}"
+				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+				Content="&#xE923;"
+				Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=WindowState, Converter={StaticResource RestoreBtnVisibilityConverter}}" />
+			<units:TitleButton
+				Grid.Row="0"
+				Width="36"
+				Height="36"
+				Command="{Binding MaximizeCommand}"
+				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+				Content="&#xE739;"
+				Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=WindowState, Converter={StaticResource MaximizeBtnVisibilityConverter}}" />
+			<units:TitleButton
+				Grid.Row="0"
+				Width="36"
+				Height="36"
+				Command="{Binding CloseCommand}"
+				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+				Content="&#xE106;" />
+		</StackPanel>
 		<Rectangle
 			Grid.Row="1"
 			Height="4"
