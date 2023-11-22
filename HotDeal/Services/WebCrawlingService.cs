@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HotDeal.Services
 {
-	public class WebCrawlingService
+	public class WebCrawlingService : IDisposable
 	{
 		private readonly UserService _UserService;
 		private ChromeDriver _driver;
@@ -186,6 +186,11 @@ namespace HotDeal.Services
 		private string ReplaceDescription(string description)
 		{
 			return description.Replace("<br>", "\n");
+		}
+
+		public void Dispose()
+		{
+			_driver.Quit();
 		}
 	}
 }

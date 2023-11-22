@@ -11,6 +11,11 @@ namespace HotDeal
 	/// </summary>
 	public partial class App
 	{
+		public App()
+		{
+			this.Dispatcher.UnhandledException += this.OnDispatcherUnhandledException;
+		}
+
 		protected override Window CreateShell()
 		{
 			return Container.Resolve<MainWindow>();
@@ -26,6 +31,17 @@ namespace HotDeal
 			containerRegistry.RegisterSingleton<WebCrawlingService>();
 			containerRegistry.RegisterSingleton<UserService>();
 			containerRegistry.RegisterSingleton<LayoutService>();
+		}
+
+		public void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+		{
+			this.Container.Resolve<WebCrawlingService>().Dispose();
+		}
+
+		protected override void OnExit(ExitEventArgs e)
+		{
+			this.Container.Resolve<WebCrawlingService>().Dispose();
+			base.OnExit(e);
 		}
 	}
 }
