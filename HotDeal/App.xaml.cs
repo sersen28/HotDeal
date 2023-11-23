@@ -35,13 +35,13 @@ namespace HotDeal
 
 		public void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
 		{
-			this.Container.Resolve<WebCrawlingService>().Dispose();
+
 		}
 
 		protected override void OnExit(ExitEventArgs e)
 		{
-			this.Container.Resolve<WebCrawlingService>().Dispose();
 			base.OnExit(e);
+			this.Container.Resolve<LayoutService>().CloseAllPopupWindows();
 		}
 	}
 }

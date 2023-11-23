@@ -12,6 +12,7 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 		<Border
 			Grid.Column="0"
@@ -271,6 +272,44 @@
 							FontSize="18"
 							Foreground="{StaticResource DefaultForeground}"
 							Text="제출"
+							TextAlignment="Center" />
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter TargetName="submitBorder" Property="Background" Value="{StaticResource DefaultBackground}" />
+							<Setter TargetName="submitBorder" Property="BorderBrush" Value="{StaticResource ButtonMouseOver}" />
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter TargetName="submitBorder" Property="Background" Value="{StaticResource DefaultBackground}" />
+							<Setter TargetName="submitBorder" Property="BorderBrush" Value="{StaticResource ButtonMousePressed}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Button.Template>
+		</Button>
+		<Button
+			Grid.Column="2"
+			MinWidth="140"
+			Command="{Binding PopupCommand}">
+			<Button.Template>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border
+						x:Name="submitBorder"
+						Margin="10,0,10,10"
+						d:Width="600"
+						Background="{StaticResource ItemBackground}"
+						BorderBrush="{StaticResource DefaultForeground}"
+						BorderThickness="3"
+						CornerRadius="10">
+						<TextBlock
+							Grid.Column="0"
+							Margin="0,12,0,12"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Center"
+							FontFamily="{StaticResource NotoMedium}"
+							FontSize="18"
+							Foreground="{StaticResource DefaultForeground}"
+							Text="팝업"
 							TextAlignment="Center" />
 					</Border>
 					<ControlTemplate.Triggers>

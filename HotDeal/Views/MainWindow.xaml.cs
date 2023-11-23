@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HotDeal.Views
@@ -13,10 +15,9 @@ namespace HotDeal.Views
 			InitializeComponent();
 		}
 
-		private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		protected override void OnClosing(CancelEventArgs e)
 		{
-			if (e.ChangedButton == MouseButton.Left)
-				DragMove();
-        }
-    }
+			Application.Current.Shutdown();
+		}
+	}
 }

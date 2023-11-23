@@ -9,6 +9,7 @@ namespace HotDeal.ViewModels
 	public class FilterSettingViewModel : BindableBase, INavigationAware
 	{
 		private readonly UserService _UserService;
+		private readonly LayoutService _layoutService;
 
 		public ReactiveProperty<uint> Discount { get; set; } = new(20);
 		public ReactiveProperty<ulong> MinimumPrice { get; set; } = new(0);
@@ -17,12 +18,19 @@ namespace HotDeal.ViewModels
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
 
 		public ReactiveCommand SubmitCommand { get; set; } = new();
+		public ReactiveCommand PopupCommand { get; set; } = new();
 
-		public FilterSettingViewModel(UserService userService)
+		public FilterSettingViewModel(UserService userService, LayoutService layoutService)
 		{
 			this._UserService = userService;
+			this._layoutService = layoutService;
 
 			this.UserFilter = this._UserService.UserFilter.ToReadOnlyReactiveProperty();
+
+			this.PopupCommand.Subscribe(() =>
+			{
+				_layoutService.ShowPopupWindow();
+			});
 
 			this.SubmitCommand.Subscribe(() =>
 			{
