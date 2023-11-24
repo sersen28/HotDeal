@@ -16,4 +16,13 @@
 
 	<SolidColorBrush x:Key="SliderBackground" Color="#252525" />
 
+	<LinearGradientBrush x:Key="DefaultGradient" StartPoint="0,0.5" EndPoint="1,0.5">
+		<GradientStop Offset="0.0" Color="#333333" />
+		<GradientStop Offset="0.1" Color="#666666" />
+		<GradientStop Offset="0.3" Color="#bbbbbb" />
+		<GradientStop Offset="0.7" Color="#bbbbbb" />
+		<GradientStop Offset="0.9" Color="#666666" />
+		<GradientStop Offset="1.0" Color="#333333" />
+	</LinearGradientBrush>
+
 </ResourceDictionary>
