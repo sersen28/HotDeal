@@ -307,7 +307,7 @@ namespace HotDeal.Services
 
 		private string ReplaceDescription(string description)
 		{
-			return description.Replace("<br>", "\n");
+			return description.Replace("<br>", "");
 		}
 	}
 }

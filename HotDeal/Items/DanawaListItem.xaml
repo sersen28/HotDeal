@@ -8,9 +8,9 @@
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
 	<Border
-		Width="650"
 		Margin="5,0,0,5"
 		Padding="8"
+		d:Width="650"
 		Background="{StaticResource ItemBackground}"
 		CornerRadius="8">
 		<Grid>
@@ -18,52 +18,52 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-			</Grid.RowDefinitions>
 			<Border
-				Grid.RowSpan="3"
+				Grid.Column="0"
 				Width="90"
 				Height="90"
 				Margin="5,5,15,5"
 				Background="{StaticResource DefaultBorderBrush}"
 				CornerRadius="8" />
 			<Image
-				Grid.RowSpan="3"
+				Grid.Column="0"
 				Width="90"
 				Height="90"
 				Margin="3,3,11,3"
 				Source="{Binding ImgSource.Value, IsAsync=True}"
 				Stretch="Uniform" />
-			<TextBlock
+			<StackPanel
 				Grid.Row="0"
 				Grid.Column="1"
-				d:Text="TESTTESTTEST&#10;TEST"
-				FontFamily="{StaticResource NotoMedium}"
-				FontSize="18"
-				Foreground="White"
-				Text="{Binding Description.Value}" />
-			<TextBlock
-				Grid.Row="1"
-				Grid.Column="1"
-				FontFamily="{StaticResource NotoRegular}"
-				FontSize="18"
-				Foreground="White">
-				<Run
-					d:Text="00,000"
-					FontSize="14"
-					Foreground="{StaticResource DarkForeground}"
-					Text="{Binding OriginalPrice.Value, StringFormat={}{0:#,#}}" />
-				<Run
-					FontSize="14"
-					Foreground="{StaticResource DarkForeground}"
-					Text="원" />
-				<Run Text="→" />
-				<Run d:Text="00,000" Text="{Binding Price.Value, StringFormat={}{0:#,#}}" />
-				<Run Text="원 (" /><Run d:Text="00" Text="{Binding Discount.Value}" />
-				<Run Text="%)" />
-			</TextBlock>
+				Margin="10,16,0,0">
+				<TextBlock
+					VerticalAlignment="Top"
+					d:Text="TESTTESTTESTTEST"
+					FontFamily="{StaticResource NotoMedium}"
+					FontSize="20"
+					Foreground="White"
+					Text="{Binding Description.Value}" />
+				<TextBlock
+					Margin="0,8,0,0"
+					VerticalAlignment="Top"
+					FontFamily="{StaticResource NotoRegular}"
+					FontSize="18"
+					Foreground="White">
+					<Run
+						d:Text="00,000"
+						FontSize="14"
+						Foreground="{StaticResource DarkForeground}"
+						Text="{Binding OriginalPrice.Value, StringFormat={}{0:#,#}}" />
+					<Run
+						FontSize="14"
+						Foreground="{StaticResource DarkForeground}"
+						Text="원" />
+					<Run Text="→" />
+					<Run d:Text="00,000" Text="{Binding Price.Value, StringFormat={}{0:#,#}}" />
+					<Run Text="원 (" /><Run d:Text="00" Text="{Binding Discount.Value}" />
+					<Run Text="%)" />
+				</TextBlock>
+			</StackPanel>
 		</Grid>
 	</Border>
 </ContentControl>

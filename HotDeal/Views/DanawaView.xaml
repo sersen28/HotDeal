@@ -68,6 +68,11 @@
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Visible"
 			VirtualizingPanel.ScrollUnit="Pixel">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				</Style>
+			</ListView.ItemContainerStyle>
 			<ListBox.Template>
 				<ControlTemplate>
 					<units:ListScrollViewer>
@@ -92,6 +97,11 @@
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Visible"
 			VirtualizingPanel.ScrollUnit="Pixel">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				</Style>
+			</ListView.ItemContainerStyle>
 			<ListBox.Template>
 				<ControlTemplate>
 					<units:ListScrollViewer>
