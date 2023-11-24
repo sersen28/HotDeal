@@ -9,8 +9,8 @@ namespace HotDeal.ViewModels
 	{
 		private readonly WebCrawlingService _webCrawlingService;
 
-		public ReadOnlyReactiveCollection<DanawaModel> DanawaList { get; set; }
-		public ReadOnlyReactiveCollection<DanawaModel> DanawaFilterList { get; set; }
+		public ReadOnlyReactiveCollection<TMonModel> DanawaList { get; set; }
+		public ReadOnlyReactiveCollection<TMonModel> DanawaFilterList { get; set; }
 
 		public ReadOnlyReactivePropertySlim<bool> IsLoading { get; set; }
 

@@ -21,7 +21,6 @@
 			<Grid.RowDefinitions>
 				<RowDefinition />
 				<RowDefinition />
-				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Border
 				Grid.RowSpan="3"
@@ -49,19 +48,21 @@
 				Grid.Row="1"
 				Grid.Column="1"
 				FontFamily="{StaticResource NotoRegular}"
-				FontSize="16"
+				FontSize="18"
 				Foreground="White">
+				<Run
+					d:Text="00,000"
+					FontSize="14"
+					Foreground="{StaticResource DarkForeground}"
+					Text="{Binding OriginalPrice.Value, StringFormat={}{0:#,#}}" />
+				<Run
+					FontSize="14"
+					Foreground="{StaticResource DarkForeground}"
+					Text="원" />
+				<Run Text="→" />
 				<Run d:Text="00,000" Text="{Binding Price.Value, StringFormat={}{0:#,#}}" />
-				<Run Text="원" />
-			</TextBlock>
-			<TextBlock
-				Grid.Row="2"
-				Grid.Column="1"
-				FontFamily="{StaticResource NotoRegular}"
-				FontSize="16"
-				Foreground="White">
-				<Run d:Text="00" Text="{Binding Discount.Value}" />
-				<Run Text="%" />
+				<Run Text="원 (" /><Run d:Text="00" Text="{Binding Discount.Value}" />
+				<Run Text="%)" />
 			</TextBlock>
 		</Grid>
 	</Border>

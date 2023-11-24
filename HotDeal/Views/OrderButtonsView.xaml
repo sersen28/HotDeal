@@ -6,11 +6,6 @@
 	xmlns:prism="http://prismlibrary.com/"
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True">
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<cvt:OrderButtonConverter x:Key="OrderButtonConverter" />
-		</ResourceDictionary>
-	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />

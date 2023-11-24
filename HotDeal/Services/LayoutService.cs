@@ -17,6 +17,7 @@ namespace HotDeal.Services
 
 		private PopupWindow _filterPopup;
 		public ReactiveProperty<bool> isShowFilterPopup = new();
+		public string DisplayContentName = "DanawaView";
 
 		public LayoutService(IRegionManager regionManager) 
         {
@@ -26,16 +27,19 @@ namespace HotDeal.Services
         public void ShowDanawaView()
 		{
 			this._regionManager.RequestNavigate("ContentRegion", "DanawaView");
+			this.DisplayContentName = "DanawaView";
 		}
 
 		public void ShowGMarketView()
 		{
 			this._regionManager.RequestNavigate("ContentRegion", "GMarketView");
+			this.DisplayContentName = "GMarketView";
 		}
 
 		public void ShowTMonView()
 		{
 			this._regionManager.RequestNavigate("ContentRegion", "TMonView");
+			this.DisplayContentName = "TMonView";
 		}
 
 		public void CloseAllPopupWindows()

@@ -82,6 +82,8 @@
 			</ItemsControl.ItemTemplate>
 		</ListView>
 		<ListView
+			Grid.Row="2"
+			Grid.Column="1"
 			d:ItemsSource="{d:SampleData ItemCount=4}"
 			Background="Transparent"
 			BorderThickness="0"
