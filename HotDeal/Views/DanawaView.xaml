@@ -4,6 +4,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:cvt="clr-namespace:HotDeal.Resources.Converters;assembly=HotDeal.Resources"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 	xmlns:items="clr-namespace:HotDeal.Items"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:prism="http://prismlibrary.com/"
@@ -11,9 +12,6 @@
 	xmlns:views="clr-namespace:HotDeal.Views"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
-	<UserControl.Resources>
-		<cvt:BooleanToVisibilityCoverter x:Key="BooleanToVisibilityCoverter" />
-	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -119,22 +117,11 @@
 			Grid.Row="0"
 			Grid.Column="0"
 			Grid.ColumnSpan="2" />
-		<Border
+		<units:LoadingProgress
 			Grid.Row="2"
-			Grid.ColumnSpan="2"
-			Margin="5"
-			d:Visibility="Collapsed"
-			Background="{StaticResource ItemBackground}"
-			CornerRadius="12"
-			Visibility="{Binding IsLoading.Value, Converter={StaticResource BooleanToVisibilityCoverter}}">
-			<TextBlock
-				HorizontalAlignment="Center"
-				VerticalAlignment="Center"
-				FontFamily="{StaticResource NotoMedium}"
-				FontSize="36"
-				Foreground="{StaticResource DefaultForeground}"
-				Text="D Loading.."
-				TextAlignment="Center" />
-		</Border>
+			Grid.ColumnSpan="3"
+			DataContext="{Binding LoadingSequence.Value}"
+			Maximum="100"
+			Minimum="0" />
 	</Grid>
 </UserControl>

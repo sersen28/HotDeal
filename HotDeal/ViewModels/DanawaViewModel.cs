@@ -13,14 +13,17 @@ namespace HotDeal.ViewModels
 		public ReadOnlyReactiveCollection<TMonModel> DanawaFilterList { get; set; }
 
 		public ReadOnlyReactivePropertySlim<bool> IsLoading { get; set; }
+		public ReadOnlyReactivePropertySlim<LoadingSequence> LoadingSequence { get; set; }
 
 		public DanawaViewModel(WebCrawlingService webCrawlingService)
 		{
 			this._webCrawlingService = webCrawlingService;
+			this.LoadingSequence = webCrawlingService.DanawaLoadingSequence.ToReadOnlyReactivePropertySlim();
 
 			this.IsLoading = _webCrawlingService.IsDanawaLoading.ToReadOnlyReactivePropertySlim();
 			this.DanawaList = _webCrawlingService.DanawaItems.ToReadOnlyReactiveCollection();
 			this.DanawaFilterList = _webCrawlingService.DanawaFilterItems.ToReadOnlyReactiveCollection();
+	
 		}
 	}
 }

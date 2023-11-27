@@ -23,6 +23,7 @@ namespace HotDeal.Services
 
 		public ReactiveCollection<TMonModel> DanawaItems { get; set; } = new();
 		public ReactiveCollection<TMonModel> DanawaFilterItems { get; set; } = new();
+		public ReactivePropertySlim<LoadingSequence> DanawaLoadingSequence { get; set; } = new();
 
 		public ReactiveCollection<TMonModel> TmonItems { get; set; } = new();
 		public ReactiveCollection<TMonModel> TmonFilterItems { get; set; } = new();
@@ -41,11 +42,15 @@ namespace HotDeal.Services
 			this._layoutService = layoutService;
 
 			this.UserFilter = this._userService.UserFilter.ToReadOnlyReactiveProperty();
+			this.DanawaLoadingSequence.Value = new("Danawa\nLoading");
 
-			InitDanawaHotDeal();
+			//InitDanawaHotDeal();
+			//InitGmarketHotDeal();
+			//InitTmonHotDeal();
+
 			//Task.Run(InitTmonHotDeal);
 			//Task.Run(InitGmarketHotDeal);
-			//Task.Run(InitDanawaHotDeal);
+			Task.Run(InitDanawaHotDeal);
 		}
 
 		public void ListSort(string key, bool isAscending)
@@ -245,13 +250,16 @@ namespace HotDeal.Services
 			this.IsGMarketLoading.Value = false;
 		}
 
-		private void InitDanawaHotDeal()
+		public void InitDanawaHotDeal()
 		{
-			this.IsDanawaLoading.Value = true;
+			var sequence = this.DanawaLoadingSequence.Value;
+
+			sequence.IsLoading.Value = true;
 			using (var controller = new WebController())
 			{
 				controller.driver.Navigate().GoToUrl("https://www.danawa.com");
 				var prod_list = controller.driver.FindElements(By.XPath("//*[@id=\"cmPickLayer\"]/div[2]/div[2]/div/ul/li"));
+				sequence.Maximum.Value = prod_list.Count;
 				foreach (var iter in prod_list)
 				{
 					try
@@ -274,11 +282,11 @@ namespace HotDeal.Services
 					catch (Exception e)
 					{
 						Debug.WriteLine($"({nameof(InitDanawaHotDeal)})" + e.Message);
-						continue;
 					}
+					sequence.Current.Value++;
 				}
 			}
-			this.IsDanawaLoading.Value = false;
+			sequence.Initialize();
 		}
 
 		private bool DanawaItemFilter(TMonModel item)
