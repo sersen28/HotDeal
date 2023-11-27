@@ -31,7 +31,7 @@
 				Height="90"
 				Margin="3,3,11,3"
 				Source="{Binding ImgSource.Value, IsAsync=True}"
-				Stretch="Uniform" />
+				Stretch="UniformToFill" />
 			<StackPanel
 				Grid.Row="0"
 				Grid.Column="1"
@@ -42,9 +42,10 @@
 					FontFamily="{StaticResource NotoMedium}"
 					FontSize="20"
 					Foreground="White"
-					Text="{Binding Description.Value}" />
+					Text="{Binding Description.Value}"
+					TextWrapping="Wrap" />
 				<TextBlock
-					Margin="0,8,0,0"
+					Margin="0,8,0,16"
 					VerticalAlignment="Top"
 					FontFamily="{StaticResource NotoRegular}"
 					FontSize="18"
