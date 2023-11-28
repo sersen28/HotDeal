@@ -2,7 +2,9 @@
 	x:Class="HotDeal.Views.FilterSettingView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:behaviors="clr-namespace:HotDeal.Resources.Behaviors;assembly=HotDeal.Resources"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:prism="http://prismlibrary.com/"
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
@@ -105,16 +107,21 @@
 						Foreground="{StaticResource DefaultForeground}"
 						Text="최소 가격"
 						TextAlignment="Center" />
-					<units:HotDealSlider
+					<TextBox
 						Grid.Row="1"
 						Grid.Column="1"
 						Margin="0,16,16,0"
-						IsSnapToTickEnabled="True"
-						Maximum="50000"
-						Minimum="0"
-						SmallChange="2500"
-						TickFrequency="2500"
-						Value="{Binding MinimumPrice.Value, Mode=TwoWay}" />
+						Background="{StaticResource DefaultBackground}"
+						BorderBrush="{StaticResource DefaultPoint}"
+						BorderThickness="1"
+						FontFamily="{StaticResource NotoRegular}"
+						Foreground="{StaticResource DefaultForeground}"
+						Text="{Binding MinimumPrice.Value, Mode=TwoWay}"
+						TextAlignment="Center">
+						<i:Interaction.Behaviors>
+							<behaviors:AllowableCharactersTextBoxBehavior MaxLength="7" RegularExpression="^[0-9.\-]+$" />
+						</i:Interaction.Behaviors>
+					</TextBox>
 					<TextBlock
 						Grid.Row="1"
 						Grid.Column="2"
@@ -134,16 +141,21 @@
 						Foreground="{StaticResource DefaultForeground}"
 						Text="최대 가격"
 						TextAlignment="Center" />
-					<units:HotDealSlider
+					<TextBox
 						Grid.Row="2"
 						Grid.Column="1"
 						Margin="0,16,16,0"
-						IsSnapToTickEnabled="True"
-						Maximum="300000"
-						Minimum="0"
-						SmallChange="10000"
-						TickFrequency="10000"
-						Value="{Binding MaximumPrice.Value, Mode=TwoWay}" />
+						Background="{StaticResource DefaultBackground}"
+						BorderBrush="{StaticResource DefaultPoint}"
+						BorderThickness="1"
+						FontFamily="{StaticResource NotoRegular}"
+						Foreground="{StaticResource DefaultForeground}"
+						Text="{Binding MaximumPrice.Value, Mode=TwoWay}"
+						TextAlignment="Center">
+						<i:Interaction.Behaviors>
+							<behaviors:AllowableCharactersTextBoxBehavior MaxLength="7" RegularExpression="^[0-9.\-]+$" />
+						</i:Interaction.Behaviors>
+					</TextBox>
 					<TextBlock
 						Grid.Row="2"
 						Grid.Column="2"
