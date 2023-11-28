@@ -12,6 +12,9 @@
 	xmlns:views="clr-namespace:HotDeal.Views"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
+	<UserControl.Resources>
+		<cvt:BooleanToVisibilityRCoverter x:Key="BooleanToVisibilityRCoverter" />
+	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -116,7 +119,8 @@
 		<views:FilterSettingView
 			Grid.Row="0"
 			Grid.Column="0"
-			Grid.ColumnSpan="2" />
+			Grid.ColumnSpan="2"
+			Visibility="{Binding Path=DataContext.IsShowPopup.Value, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:DanawaView}}, Converter={StaticResource BooleanToVisibilityRCoverter}}" />
 		<units:LoadingProgress
 			Grid.Row="2"
 			Grid.ColumnSpan="3"

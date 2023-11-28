@@ -5,6 +5,7 @@ using Prism.Regions;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace HotDeal.Services
 		private readonly IRegionManager _regionManager;
 
 		private PopupWindow _filterPopup;
-		public ReactiveProperty<bool> isShowFilterPopup = new();
+		public ReactiveProperty<bool> IsShowFilterPopup = new();
 		public string DisplayContentName = "DanawaView";
 
 		public LayoutService(IRegionManager regionManager) 
@@ -49,7 +50,7 @@ namespace HotDeal.Services
 				this._filterPopup.Close();
 				this._filterPopup = null;
 			}
-			this.isShowFilterPopup.Value = false;
+			this.IsShowFilterPopup.Value = false; 
 		}
 
 		public void ShowPopupWindow()
@@ -59,12 +60,12 @@ namespace HotDeal.Services
 				_filterPopup = new PopupWindow();
 				_filterPopup.Closed += (s, e) =>
 				{
-					isShowFilterPopup.Value = false;
+					IsShowFilterPopup.Value = false;
 					_filterPopup = null;
 				};
 				_filterPopup.Show();
-				isShowFilterPopup.Value = true;
-			}
+				IsShowFilterPopup.Value = true;
+			};
 		}
 	}
 }
