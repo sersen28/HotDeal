@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace HotDeal.Services
 {
@@ -9,6 +10,7 @@ namespace HotDeal.Services
 	{
 		public IWebDriver driver { get; init; }
 		public ChromeDriverService driverService { get; init; }
+		
 
 		public WebController()
 		{
@@ -32,10 +34,13 @@ namespace HotDeal.Services
 
 		public void Dispose()
 		{
-			driver.Close();
-			driver.Quit();
-			driver.Dispose();
-			driverService.Dispose();
+			SynchronizationContext synchronizationContext = new SynchronizationContext();
+			synchronizationContext.Post(_ =>
+			{
+				driver.Quit();
+				driver.Dispose();
+				driverService.Dispose();
+			}, null);
 		}
 	}
 }

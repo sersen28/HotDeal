@@ -36,12 +36,12 @@ namespace HotDeal
 		public void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
 		{
 
+
 		}
 
 		protected override void OnExit(ExitEventArgs e)
 		{
 			base.OnExit(e);
-			this.Container.Resolve<LayoutService>().CloseAllPopupWindows();
 		}
 	}
 }

@@ -3,6 +3,8 @@ using HotDeal.Services;
 using Prism.Mvvm;
 using Prism.Regions;
 using Reactive.Bindings;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HotDeal.ViewModels
 {
@@ -10,6 +12,7 @@ namespace HotDeal.ViewModels
 	{
 		private readonly UserService _UserService;
 		private readonly LayoutService _layoutService;
+		private readonly WebCrawlingService _webCrawlingService;
 
 		public ReactiveProperty<uint> Discount { get; set; } = new(20);
 		public ReactiveProperty<ulong> MinimumPrice { get; set; } = new(0);
@@ -19,11 +22,14 @@ namespace HotDeal.ViewModels
 
 		public ReactiveCommand SubmitCommand { get; set; } = new();
 		public ReactiveCommand PopupCommand { get; set; } = new();
+		public AsyncReactiveCommand RefreshCommand { get; set; } = new();
+		//public ReactiveCommand RefreshCommand { get; set; } = new();
 
-		public FilterSettingViewModel(UserService userService, LayoutService layoutService)
+		public FilterSettingViewModel(UserService userService, LayoutService layoutService, WebCrawlingService webCrawlingService)
 		{
 			this._UserService = userService;
 			this._layoutService = layoutService;
+			this._webCrawlingService = webCrawlingService;
 
 			this.UserFilter = this._UserService.UserFilter.ToReadOnlyReactiveProperty();
 
@@ -40,7 +46,22 @@ namespace HotDeal.ViewModels
 					max: this.MaximumPrice.Value
 				);
 			});
-			
+
+			//this.RefreshCommand.Subscribe(async () =>
+			//{
+			//	_webCrawlingService.SetDanawaHotDeal();
+			//});
+
+			this.RefreshCommand.Subscribe(async () =>
+			{
+				await Task.Run(_webCrawlingService.SetDanawaHotDeal);
+			});
+
+			this.PopupCommand.Subscribe(() =>
+			{
+				_layoutService.ShowPopupWindow();
+			});
+
 			Initialize();
 		}
 

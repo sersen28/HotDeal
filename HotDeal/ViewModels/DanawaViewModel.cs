@@ -26,8 +26,7 @@ namespace HotDeal.ViewModels
 			this.IsShowPopup = this._layoutService.IsShowFilterPopup.ToReadOnlyReactivePropertySlim();
 			this.IsLoading = _webCrawlingService.IsDanawaLoading.ToReadOnlyReactivePropertySlim();
 			this.DanawaList = _webCrawlingService.DanawaItems.ToReadOnlyReactiveCollection();
-			this.DanawaFilterList = _webCrawlingService.DanawaFilterItems.ToReadOnlyReactiveCollection();
-	
+			this.DanawaFilterList = _webCrawlingService.DanawaFilterItems.ToReadOnlyReactiveCollection();	
 		}
 	}
 }

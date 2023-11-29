@@ -10,7 +10,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Xps.Serialization;
 
@@ -20,6 +22,7 @@ namespace HotDeal.Services
 	{
 		private readonly UserService _userService;
 		private readonly LayoutService _layoutService;
+		private CancellationTokenSource _token = new();
 
 		public ReactiveCollection<TMonModel> DanawaItems { get; set; } = new();
 		public ReactiveCollection<TMonModel> DanawaFilterItems { get; set; } = new();
@@ -36,6 +39,7 @@ namespace HotDeal.Services
 		public ReactivePropertySlim<bool> IsGMarketLoading { get; set; } = new(true);
 
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
+		
 		public WebCrawlingService(UserService userService, LayoutService layoutService) 
 		{
 			this._userService = userService;
@@ -44,15 +48,63 @@ namespace HotDeal.Services
 			this.UserFilter = this._userService.UserFilter.ToReadOnlyReactiveProperty();
 			this.DanawaLoadingSequence.Value = new("Danawa\nLoading");
 
-			//InitDanawaHotDeal();
-			//InitGmarketHotDeal();
-			//InitTmonHotDeal();
-
-			//Task.Run(InitTmonHotDeal);
-			//Task.Run(InitGmarketHotDeal);
-			Task.Run(InitDanawaHotDeal);
+			//InitializeList();
 		}
 
+		public void Cancel()
+		{
+			_token.Cancel();
+		}
+
+		public void SetDanawaHotDeal()
+		{
+			var sequence = this.DanawaLoadingSequence.Value;
+
+			sequence.IsLoading.Value = true;
+			DanawaItems.ClearOnScheduler();
+			DanawaFilterItems.ClearOnScheduler();
+			using (var controller = new WebController())
+			{
+				controller.driver.Navigate().GoToUrl("https://www.danawa.com");
+				var prod_list = controller.driver.FindElements(By.XPath("//*[@id=\"cmPickLayer\"]/div[2]/div[2]/div/ul/li"));
+				sequence.Maximum.Value = prod_list.Count;
+				foreach (var iter in prod_list)
+				{
+					try
+					{
+						var img = iter.FindElement(By.TagName("img")).GetAttribute("src");
+						var description = iter.FindElement(By.ClassName("prod-list__txt")).GetAttribute("innerHTML");
+						var price_str = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
+						var discount_str = iter.FindElement(By.ClassName("rate")).GetAttribute("innerHTML");
+
+
+						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
+						{
+							var item = new TMonModel(ReplaceDescription(description), price, discount, img);
+							this.DanawaItems.AddOnScheduler(item);
+							if (DanawaItemFilter(item))
+							{
+								this.DanawaFilterItems.AddOnScheduler(item);
+							}
+						}
+					}
+					catch (Exception e)
+					{
+						Debug.WriteLine($"({nameof(SetDanawaHotDeal)})" + e.Message);
+					}
+
+					if (_token.IsCancellationRequested)
+					{
+						controller.Dispose();
+						return;
+					}
+					sequence.Current.Value++;
+				}
+			}
+			sequence.Initialize();
+		}
+
+		#region Sort
 		public void ListSort(string key, bool isAscending)
 		{
 			switch (key)
@@ -167,8 +219,15 @@ namespace HotDeal.Services
 			source.AddRangeOnScheduler(src);
 			filtered.AddRangeOnScheduler(ftd);
 		}
+		#endregion
 
-		private void InitTmonHotDeal()
+
+		private async void InitializeList()
+		{
+			await Task.Run(SetDanawaHotDeal);
+		}
+
+		private void SetTmonHotDealList()
 		{
 			this.IsTMonLoading.Value = true;
 			ReadOnlyCollection<IWebElement> list;
@@ -201,7 +260,7 @@ namespace HotDeal.Services
 					}
 					catch (Exception e)
 					{
-						Debug.WriteLine($"({nameof(InitGmarketHotDeal)})" + e.Message);
+						Debug.WriteLine($"({nameof(SetGmarketHotDeal)})" + e.Message);
 						continue;
 					}
 				}
@@ -210,7 +269,7 @@ namespace HotDeal.Services
 			this.IsTMonLoading.Value = false;
 		}
 
-		private void InitGmarketHotDeal()
+		private void SetGmarketHotDeal()
 		{
 			this.IsGMarketLoading.Value = true;
 			using (var controller = new WebController())
@@ -242,51 +301,12 @@ namespace HotDeal.Services
 					}
 					catch (Exception e)
 					{
-						Debug.WriteLine($"({nameof(InitGmarketHotDeal)})" + e.Message);
+						Debug.WriteLine($"({nameof(SetGmarketHotDeal)})" + e.Message);
 						continue;
 					}
 				}
 			}
 			this.IsGMarketLoading.Value = false;
-		}
-
-		public void InitDanawaHotDeal()
-		{
-			var sequence = this.DanawaLoadingSequence.Value;
-
-			sequence.IsLoading.Value = true;
-			using (var controller = new WebController())
-			{
-				controller.driver.Navigate().GoToUrl("https://www.danawa.com");
-				var prod_list = controller.driver.FindElements(By.XPath("//*[@id=\"cmPickLayer\"]/div[2]/div[2]/div/ul/li"));
-				sequence.Maximum.Value = prod_list.Count;
-				foreach (var iter in prod_list)
-				{
-					try
-					{
-						var img = iter.FindElement(By.TagName("img")).GetAttribute("src");
-						var description = iter.FindElement(By.ClassName("prod-list__txt")).GetAttribute("innerHTML");
-						var price_str = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
-						var discount_str = iter.FindElement(By.ClassName("rate")).GetAttribute("innerHTML");
-
-						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
-						{
-							var item = new TMonModel(ReplaceDescription(description), price, discount, img);
-							this.DanawaItems.Add(item);
-							if (DanawaItemFilter(item))
-							{
-								this.DanawaFilterItems.Add(item);
-							}
-						}
-					}
-					catch (Exception e)
-					{
-						Debug.WriteLine($"({nameof(InitDanawaHotDeal)})" + e.Message);
-					}
-					sequence.Current.Value++;
-				}
-			}
-			sequence.Initialize();
 		}
 
 		private bool DanawaItemFilter(TMonModel item)

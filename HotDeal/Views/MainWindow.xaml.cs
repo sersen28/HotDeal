@@ -14,10 +14,5 @@ namespace HotDeal.Views
 		{
 			InitializeComponent();
 		}
-
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			Application.Current.Shutdown();
-		}
 	}
 }
