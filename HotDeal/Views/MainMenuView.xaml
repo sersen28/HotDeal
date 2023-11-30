@@ -37,7 +37,10 @@
 				GroupName="MainMenuGroup" />
 		</StackPanel>
 		<StackPanel Grid.Column="0" VerticalAlignment="Bottom">
-			<units:MenuButton Content="장바구니" GroupName="MainMenuGroup" />
+			<units:MenuButton
+				Command="{Binding WishlistCommand}"
+				Content="장바구니"
+				GroupName="MainMenuGroup" />
 			<units:MenuButton Content="환경설정" GroupName="MainMenuGroup" />
 		</StackPanel>
 	</Grid>

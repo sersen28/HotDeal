@@ -25,22 +25,15 @@ namespace HotDeal.Services
 			this._regionManager = regionManager;
 		}
 
-        public void ShowDanawaView()
+		public void ChangeContentRegion(string viewName)
 		{
-			this._regionManager.RequestNavigate("ContentRegion", "DanawaView");
-			this.DisplayContentName = "DanawaView";
+			ChangeRegion("ContentRegion", viewName);
 		}
 
-		public void ShowGMarketView()
+		public void ChangeRegion(string regionName, string viewName)
 		{
-			this._regionManager.RequestNavigate("ContentRegion", "GMarketView");
-			this.DisplayContentName = "GMarketView";
-		}
-
-		public void ShowTMonView()
-		{
-			this._regionManager.RequestNavigate("ContentRegion", "TMonView");
-			this.DisplayContentName = "TMonView";
+			this._regionManager.RequestNavigate(regionName, viewName);
+			this.DisplayContentName = viewName;
 		}
 
 		public void CloseAllPopupWindows()

@@ -1,4 +1,5 @@
 ﻿using HotDeal.Services;
+using HotDeal.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Reactive.Bindings;
@@ -15,6 +16,7 @@ namespace HotDeal.ViewModels
 		public ReactiveCommand DanawaCommand { get; set; } = new();
 		public ReactiveCommand TmonCommand { get; set; } = new();
 		public ReactiveCommand GmarketCommand { get; set; } = new();
+		public ReactiveCommand WishlistCommand { get; set; } = new();
 
 		public MainMenuViewModel(LayoutService layoutService)
 		{
@@ -22,17 +24,22 @@ namespace HotDeal.ViewModels
 
 			this.DanawaCommand.Subscribe(() =>
 			{
-				this._layoutService.ShowDanawaView();
+				this._layoutService.ChangeContentRegion(nameof(DanawaView));
 			});
 
 			this.TmonCommand.Subscribe(() =>
 			{
-				this._layoutService.ShowTMonView();
+				this._layoutService.ChangeContentRegion(nameof(TMonView));
 			});
 
 			this.GmarketCommand.Subscribe(() =>
 			{
-				this._layoutService.ShowGMarketView();
+				this._layoutService.ChangeContentRegion(nameof(GMarketView));
+			});
+
+			this.WishlistCommand.Subscribe(() =>
+			{
+				this._layoutService.ChangeContentRegion(nameof(WishlistView));
 			});
 		}
 	}

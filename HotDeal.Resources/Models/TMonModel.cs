@@ -21,6 +21,8 @@ namespace HotDeal.Resources.Models
 		public ReactiveProperty<ulong?> Price { get; set; } = new();
 		public ReactiveProperty<ulong?> OriginalPrice { get; set; } = new();
 
+		public TMonModel() { }
+
 		public TMonModel(string description, ulong price, uint discount, string imgSource, string hyperlink)
 		{
 			this.Description.Value = description;
@@ -46,6 +48,21 @@ namespace HotDeal.Resources.Models
 			this.Hyperlink.Value = hyperlink;
 			this.OriginalPrice.Value = original;
 			this.Reduce.Value = this.OriginalPrice.Value - this.Price.Value;
+		}
+
+		public TMonModel Convert(WishlistModel source)
+		{
+			var ret = new TMonModel { };
+			this.Description.Value = source.Description.Value;
+			this.Discount.Value = source.Discount.Value;
+			this.Reduce.Value = source.Reduce.Value;
+			this.ImgSource.Value = source.ImgSource.Value;
+			this.Discount.Value = source.Discount.Value;
+			this.Hyperlink.Value = source.Hyperlink.Value;
+			this.Price.Value = source.Price.Value;
+			this.OriginalPrice.Value = source.OriginalPrice.Value;
+
+			return ret;
 		}
 	}
 }

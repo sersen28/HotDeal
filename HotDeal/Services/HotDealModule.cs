@@ -25,6 +25,7 @@ namespace HotDeal.Services
 			containerRegistry.RegisterForNavigation<GMarketView, GMarketViewModel>();
 			containerRegistry.RegisterForNavigation<TMonView, TMonViewModel>();
 			containerRegistry.RegisterForNavigation<FilterSettingView, FilterSettingViewModel>();
+			containerRegistry.RegisterForNavigation<WishlistView, WishlistViewModel>();
 		}
 	}
 }
