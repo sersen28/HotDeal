@@ -1,13 +1,7 @@
-﻿using HotDeal.Resources.Constants;
-using HotDeal.Services;
-using HotDeal.Views;
+﻿using HotDeal.Services;
 using Prism.Mvvm;
 using Prism.Regions;
 using Reactive.Bindings;
-using System;
-using System.ComponentModel;
-using System.Printing.Interop;
-using System.Threading.Tasks;
 
 namespace HotDeal.ViewModels
 {

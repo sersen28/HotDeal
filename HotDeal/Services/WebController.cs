@@ -38,6 +38,7 @@ namespace HotDeal.Services
 			synchronizationContext.Post(_ =>
 			{
 				driver.Quit();
+				Thread.Sleep(3000);
 				driver.Dispose();
 				driverService.Dispose();
 			}, null);

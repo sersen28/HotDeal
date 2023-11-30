@@ -2,6 +2,7 @@
 using HotDeal.Services;
 using Prism.Mvvm;
 using Reactive.Bindings;
+using System;
 
 namespace HotDeal.ViewModels
 {
@@ -17,6 +18,8 @@ namespace HotDeal.ViewModels
 		public ReadOnlyReactivePropertySlim<bool> IsLoading { get; set; }
 		public ReadOnlyReactivePropertySlim<LoadingSequence> LoadingSequence { get; set; }
 
+		public ReactiveCommand<string> HyperlinkCommand { get; set; } = new();
+
 		public DanawaViewModel(WebCrawlingService webCrawlingService, LayoutService layoutService)
 		{
 			this._webCrawlingService = webCrawlingService;
@@ -26,7 +29,9 @@ namespace HotDeal.ViewModels
 			this.IsShowPopup = this._layoutService.IsShowFilterPopup.ToReadOnlyReactivePropertySlim();
 			this.IsLoading = _webCrawlingService.IsDanawaLoading.ToReadOnlyReactivePropertySlim();
 			this.DanawaList = _webCrawlingService.DanawaItems.ToReadOnlyReactiveCollection();
-			this.DanawaFilterList = _webCrawlingService.DanawaFilterItems.ToReadOnlyReactiveCollection();	
+			this.DanawaFilterList = _webCrawlingService.DanawaFilterItems.ToReadOnlyReactiveCollection();
+
+			this.HyperlinkCommand.Subscribe(this._webCrawlingService.OpenHyperlink);
 		}
 	}
 }

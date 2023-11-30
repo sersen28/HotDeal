@@ -7,9 +7,7 @@ using System.Windows;
 namespace HotDeal.ViewModels
 {
 	public class TitleViewModel : BindableBase
-	{
-		public ReactivePropertySlim<string> Title { get; set; } = new(HotDealText.ApplicationTitle);
-		
+	{		
 		public ReactiveCommand CloseCommand { get; set; } = new();
 		public ReactiveCommand MinimizeCommand { get; set; } = new();
 		public ReactiveCommand MaximizeCommand { get; set; } = new();

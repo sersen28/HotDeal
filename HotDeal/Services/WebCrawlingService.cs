@@ -1,20 +1,15 @@
 ﻿using HotDeal.Resources.Models;
 using HotDeal.Views;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using Reactive.Bindings;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Xps.Serialization;
 
 namespace HotDeal.Services
 {
@@ -56,6 +51,34 @@ namespace HotDeal.Services
 			_token.Cancel();
 		}
 
+		public void OpenHyperlink(string link)
+		{
+			try
+			{
+				Process.Start(link);
+			}
+			catch
+			{
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				{
+					link = link.Replace("&", "^&");
+					Process.Start(new ProcessStartInfo(link) { UseShellExecute = true });
+				}
+				else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+				{
+					Process.Start("xdg-open", link);
+				}
+				else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+				{
+					Process.Start("open", link);
+				}
+				else
+				{
+					throw;
+				}
+			}
+		}
+
 		public void SetDanawaHotDeal()
 		{
 			var sequence = this.DanawaLoadingSequence.Value;
@@ -73,6 +96,7 @@ namespace HotDeal.Services
 					try
 					{
 						var img = iter.FindElement(By.TagName("img")).GetAttribute("src");
+						var hyperlink = iter.FindElement(By.XPath("a")).GetAttribute("href");
 						var description = iter.FindElement(By.ClassName("prod-list__txt")).GetAttribute("innerHTML");
 						var price_str = iter.FindElement(By.ClassName("num")).GetAttribute("innerHTML");
 						var discount_str = iter.FindElement(By.ClassName("rate")).GetAttribute("innerHTML");
@@ -80,7 +104,7 @@ namespace HotDeal.Services
 
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
-							var item = new TMonModel(ReplaceDescription(description), price, discount, img);
+							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
 							this.DanawaItems.AddOnScheduler(item);
 							if (DanawaItemFilter(item))
 							{
@@ -243,6 +267,7 @@ namespace HotDeal.Services
 					{
 						var img = iter.FindElement(By.ClassName("thumb_image")).GetAttribute("data-src");
 						var description = iter.FindElement(By.ClassName("title_name")).GetAttribute("innerHTML");
+						var hyperlink = iter.FindElement(By.XPath("a")).GetAttribute("href");
 						var price_str = iter.FindElement(By.XPath("a/div/div[2]/div[2]/span[1]/span[2]/i[1]")).GetAttribute("innerHTML");
 						var original_price = iter.FindElement(By.XPath("a/div/div[2]/div[2]/span[1]/span[1]/i")).GetAttribute("innerHTML");
 						var discount_str = iter.FindElement(By.XPath("a/div/div[2]/div[2]/strong/i")).GetAttribute("innerHTML");
@@ -250,7 +275,7 @@ namespace HotDeal.Services
 
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
-							var item = new TMonModel(ReplaceDescription(description), price, discount, img);
+							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
 							this.TmonItems.Add(item);
 							if (DanawaItemFilter(item))
 							{
@@ -281,6 +306,7 @@ namespace HotDeal.Services
 					try
 					{
 						var img = iter.FindElement(By.XPath("div/a/img")).GetAttribute("src");
+						var hyperlink = iter.FindElement(By.XPath("div/a")).GetAttribute("href");
 						var description = iter.FindElement(By.XPath("div/a/span")).GetAttribute("innerHTML");
 						var price_str = iter.FindElement(By.XPath("div/div[1]/span[1]/strong")).GetAttribute("innerHTML");
 						var original_price = iter.FindElement(By.XPath("div/div[1]/span[1]/del")).GetAttribute("innerHTML");
@@ -291,7 +317,7 @@ namespace HotDeal.Services
 
 						if (ulong.TryParse(price_str, out var price) && uint.TryParse(discount_str, out var discount))
 						{
-							var item = new TMonModel(ReplaceDescription(description), price, discount, img);
+							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
 							this.GMarketItems.Add(item);
 							if (DanawaItemFilter(item))
 							{
