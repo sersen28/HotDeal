@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<SolidColorBrush x:Key="TitleBackground" Color="#444444" />
+	<SolidColorBrush x:Key="TitleBackground" Color="#252525" />
 	<SolidColorBrush x:Key="ItemBackground" Color="#444444" />
 
-	<SolidColorBrush x:Key="DefaultBackground" Color="#252525" />
+	<SolidColorBrush x:Key="DefaultBackground" Color="#444444" />
 	<SolidColorBrush x:Key="DefaultBorderBrush" Color="#141414" />
 	<SolidColorBrush x:Key="DefaultForeground" Color="#f0f0f0" />
 	<SolidColorBrush x:Key="DarkForeground" Color="#aaaaaa" />
@@ -21,15 +21,23 @@
 	<SolidColorBrush x:Key="MainColor5" Color="#141414" />
 
 
+	<SolidColorBrush x:Key="MenuBackground" Color="#252525" />
+	<SolidColorBrush x:Key="MenuMouseOver" Color="#333333" />
+	<SolidColorBrush x:Key="MenuMousePressed" Color="#303030" />
+	<SolidColorBrush x:Key="MenuSelected" Color="#444444" />
+
+	<SolidColorBrush x:Key="Divider" Color="#f0f0f0" />
+
+
 	<SolidColorBrush x:Key="SliderBackground" Color="#252525" />
 
 	<LinearGradientBrush x:Key="DefaultGradient" StartPoint="0,0.5" EndPoint="1,0.5">
-		<GradientStop Offset="0.0" Color="#333333" />
-		<GradientStop Offset="0.1" Color="#666666" />
+		<GradientStop Offset="0.0" Color="#666666" />
+		<GradientStop Offset="0.1" Color="#999999" />
 		<GradientStop Offset="0.3" Color="#bbbbbb" />
 		<GradientStop Offset="0.7" Color="#bbbbbb" />
-		<GradientStop Offset="0.9" Color="#666666" />
-		<GradientStop Offset="1.0" Color="#333333" />
+		<GradientStop Offset="0.9" Color="#999999" />
+		<GradientStop Offset="1.0" Color="#666666" />
 	</LinearGradientBrush>
 
 </ResourceDictionary>

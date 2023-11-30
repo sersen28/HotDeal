@@ -10,7 +10,7 @@
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
-	<Grid Margin="0,16,16,0">
+	<Grid Margin="0,0,0,0" Background="{StaticResource ItemBackground}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
@@ -19,9 +19,9 @@
 		</Grid.ColumnDefinitions>
 		<Border
 			Grid.Column="0"
-			Margin="10,0,10,10"
+			Margin="16"
 			d:Width="600"
-			Background="{StaticResource ItemBackground}"
+			Background="{StaticResource MenuBackground}"
 			CornerRadius="10">
 			<Grid>
 				<Grid.ColumnDefinitions>
@@ -270,8 +270,8 @@
 				<ControlTemplate TargetType="{x:Type Button}">
 					<Border
 						x:Name="submitBorder"
-						Margin="10,0,10,10"
-						Background="{StaticResource ItemBackground}"
+						Margin="0,16,16,16"
+						Background="{StaticResource MenuBackground}"
 						BorderBrush="{StaticResource DefaultForeground}"
 						BorderThickness="3"
 						CornerRadius="10">
@@ -307,8 +307,8 @@
 				<ControlTemplate TargetType="{x:Type Button}">
 					<Border
 						x:Name="submitBorder"
-						Margin="10,0,10,10"
-						Background="{StaticResource ItemBackground}"
+						Margin="0,16,16,16"
+						Background="{StaticResource MenuBackground}"
 						BorderBrush="{StaticResource DefaultForeground}"
 						BorderThickness="3"
 						CornerRadius="10">
@@ -344,8 +344,8 @@
 				<ControlTemplate TargetType="{x:Type Button}">
 					<Border
 						x:Name="submitBorder"
-						Margin="10,0,10,10"
-						Background="{StaticResource ItemBackground}"
+						Margin="0,16,16,16"
+						Background="{StaticResource MenuBackground}"
 						BorderBrush="{StaticResource DefaultForeground}"
 						BorderThickness="3"
 						CornerRadius="10">

@@ -11,7 +11,7 @@
 		Margin="5,0,0,5"
 		Padding="8"
 		d:Width="650"
-		Background="{StaticResource ItemBackground}"
+		Background="{StaticResource MenuBackground}"
 		CornerRadius="8">
 		<Grid>
 			<Grid.ColumnDefinitions>

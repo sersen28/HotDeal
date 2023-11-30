@@ -22,7 +22,7 @@
 				<ControlTemplate TargetType="{x:Type units:OrderButton}">
 					<Border
 						x:Name="border"
-						Background="{StaticResource ItemBackground}"
+						Background="{StaticResource MenuBackground}"
 						BorderBrush="{StaticResource DefaultForeground}"
 						BorderThickness="2"
 						CornerRadius="8">
@@ -45,9 +45,7 @@
 								FontFamily="{StaticResource NotoRegular}"
 								FontSize="11"
 								Foreground="{StaticResource DefaultForeground}"
-								TextAlignment="Center" >
-								
-							</TextBlock>
+								TextAlignment="Center" />
 						</StackPanel>
 					</Border>
 					<ControlTemplate.Triggers>

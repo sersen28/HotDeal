@@ -5,8 +5,23 @@
 	xmlns:prism="http://prismlibrary.com/"
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True">
-	<Grid>
-		<StackPanel VerticalAlignment="top">
+	<Grid MinWidth="200" Background="{StaticResource MenuBackground}">
+		<StackPanel Grid.Column="0" VerticalAlignment="top">
+			<TextBlock
+				Grid.Row="0"
+				Margin="0,15,0,30"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				FontFamily="{StaticResource NotoMedium}"
+				FontSize="24"
+				FontWeight="Medium"
+				Foreground="{StaticResource DefaultForeground}"
+				Text="HotDeal&#10;Finder"
+				TextAlignment="Center" />
+			<Rectangle
+				Height="4"
+				Margin="20,0,20,20"
+				Fill="{StaticResource DefaultForeground}" />
 			<units:MenuButton
 				Command="{Binding DanawaCommand}"
 				Content="다나와"
@@ -21,7 +36,7 @@
 				Content="티몬"
 				GroupName="MainMenuGroup" />
 		</StackPanel>
-		<StackPanel VerticalAlignment="Bottom">
+		<StackPanel Grid.Column="0" VerticalAlignment="Bottom">
 			<units:MenuButton Content="장바구니" GroupName="MainMenuGroup" />
 			<units:MenuButton Content="환경설정" GroupName="MainMenuGroup" />
 		</StackPanel>
