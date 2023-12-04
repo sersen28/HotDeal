@@ -9,6 +9,7 @@
 	Width="1600"
 	Height="800"
 	prism:ViewModelLocator.AutoWireViewModel="True"
+	WindowStartupLocation="CenterScreen"
 	mc:Ignorable="d">
 	<WindowChrome.WindowChrome>
 		<WindowChrome CaptionHeight="34" />

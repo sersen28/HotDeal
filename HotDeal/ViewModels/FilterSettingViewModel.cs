@@ -57,11 +57,6 @@ namespace HotDeal.ViewModels
 				await Task.Run(_webCrawlingService.SetDanawaHotDeal);
 			});
 
-			this.PopupCommand.Subscribe(() =>
-			{
-				_layoutService.ShowPopupWindow();
-			});
-
 			Initialize();
 		}
 

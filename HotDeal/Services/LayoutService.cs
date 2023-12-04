@@ -1,4 +1,5 @@
-﻿using HotDeal.Resources.UI.Units;
+﻿using HotDeal.Items;
+using HotDeal.Resources.UI.Units;
 using HotDeal.Views;
 using Prism.Ioc;
 using Prism.Regions;
@@ -43,7 +44,17 @@ namespace HotDeal.Services
 				this._filterPopup.Close();
 				this._filterPopup = null;
 			}
-			this.IsShowFilterPopup.Value = false; 
+			this.IsShowFilterPopup.Value = false;
+		}
+
+		public void ShowModalMessageBox(string Message)
+		{
+			var msg = new HotDealMessageBox
+			{
+				WindowStartupLocation=System.Windows.WindowStartupLocation.CenterScreen,
+				Message = Message,
+			};
+			msg.ShowDialog();
 		}
 
 		public void ShowPopupWindow()
