@@ -1,27 +1,15 @@
-﻿using OpenQA.Selenium;
+﻿using HotDeal.Resources.Constants;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HotDeal.Items
 {
-    /// <summary>
-    /// HotDealMessageBox.xaml에 대한 상호 작용 논리
-    /// </summary>
-    public partial class HotDealMessageBox : Window
+	/// <summary>
+	/// HotDealMessageBox.xaml에 대한 상호 작용 논리
+	/// </summary>
+	public partial class HotDealMessageBox : Window
 	{
 		public enum DWMWINDOWATTRIBUTE
 		{
@@ -50,6 +38,27 @@ namespace HotDeal.Items
 
 		public static readonly DependencyProperty MessageProperty =
 			DependencyProperty.Register("Message", typeof(string),
+				typeof(HotDealMessageBox));
+
+
+		public MessageBoxType Type
+		{
+			get { return (MessageBoxType)GetValue(TypeProperty); }
+			set { SetValue(TypeProperty, value); }
+		}
+		public static readonly DependencyProperty TypeProperty =
+			DependencyProperty.Register("Type", typeof(MessageBoxType),
+				typeof(HotDealMessageBox));
+
+
+		public string MessageTitle
+		{
+			get { return (string)GetValue(TitleProperty); }
+			set { SetValue(TitleProperty, value); }
+		}
+
+		public static readonly DependencyProperty MessageTitleProperty =
+			DependencyProperty.Register("MessageTitle", typeof(string),
 				typeof(HotDealMessageBox));
 
 		public HotDealMessageBox()
