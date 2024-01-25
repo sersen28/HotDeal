@@ -12,7 +12,7 @@
 	</WindowChrome.WindowChrome>
 	<Grid Background="{StaticResource DefaultBackground}">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" MinHeight="34" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<local:TitleView Grid.Row="0" />

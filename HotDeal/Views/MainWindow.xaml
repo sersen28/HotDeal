@@ -26,13 +26,13 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" MinHeight="34" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 			<ContentControl
 				Grid.Row="0"
 				Grid.ColumnSpan="2"
-				d:Height="70"
+				d:Height="34"
 				prism:RegionManager.RegionName="TitleRegion" />
 			<ContentControl
 				Grid.Row="1"
@@ -45,4 +45,14 @@
 				prism:RegionManager.RegionName="ContentRegion" />
 		</Grid>
 	</Border>
+	<Window.Style>
+		<Style TargetType="{x:Type Window}">
+			<Setter Property="WindowChrome.ResizeBorderThickness" Value="10" />
+			<Style.Triggers>
+				<Trigger Property="WindowState" Value="Maximized">
+					<Setter Property="WindowChrome.ResizeBorderThickness" Value="0" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Style>
 </Window>

@@ -12,19 +12,20 @@
 		</resource:ThemeResolver>
 	</ResourceDictionary.MergedDictionaries>
 
-	<Style TargetType="{x:Type units:TitleButton}">
+	<Style TargetType="{x:Type units:TitleCloseButton}">
 		<Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
 		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Content" Value="&#xE106;" />
 		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="Command" Value="{Binding CloseCommand}" />
 		<Setter Property="Foreground" Value="{StaticResource DefaultForeground}" />
 		<Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
 		<Setter Property="FontSize" Value="10" />
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type units:TitleButton}">
+				<ControlTemplate TargetType="{x:Type units:TitleCloseButton}">
 					<Border x:Name="border" Background="{TemplateBinding Background}">
 						<TextBlock
+							Margin="{TemplateBinding ContentMargin}"
 							HorizontalAlignment="Center"
 							VerticalAlignment="Center"
 							Foreground="{TemplateBinding Foreground}"
@@ -32,10 +33,10 @@
 					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
-							<Setter TargetName="border" Property="Background" Value="{StaticResource ButtonMouseOver}" />
+							<Setter TargetName="border" Property="Background" Value="#C42B1C" />
 						</Trigger>
 						<Trigger Property="IsPressed" Value="True">
-							<Setter TargetName="border" Property="Background" Value="{StaticResource ButtonMousePressed}" />
+							<Setter TargetName="border" Property="Background" Value="#C94132" />
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

@@ -2,46 +2,104 @@
 	x:Class="HotDeal.Views.TitleView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:const="clr-namespace:HotDeal.Resources.Constants;assembly=HotDeal.Resources"
 	xmlns:cvt="clr-namespace:HotDeal.Resources.Converters;assembly=HotDeal.Resources"
 	xmlns:prism="http://prismlibrary.com/"
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
+	x:Name="view"
+	MinHeight="34"
 	prism:ViewModelLocator.AutoWireViewModel="True">
 	<UserControl.Resources>
 		<cvt:RestoreBtnVisibilityConverter x:Key="RestoreBtnVisibilityConverter" />
 		<cvt:MaximizeBtnVisibilityConverter x:Key="MaximizeBtnVisibilityConverter" />
 	</UserControl.Resources>
-	<Grid Margin="0" Background="{StaticResource TitleBackground}">
+	<Grid
+		Height="34"
+		MinHeight="34"
+		Background="{StaticResource TitleBackground}">
+		<TextBlock
+			Margin="10,0,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Center"
+			FontFamily="{StaticResource NotoMedium}"
+			FontSize="16"
+			Foreground="{StaticResource DefaultForeground}"
+			Text="{Binding Title, ElementName=view, TargetNullValue={x:Null}}" />
 		<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 			<units:TitleButton
 				Grid.Row="0"
-				Width="36"
-				Height="36"
+				Width="45"
+				VerticalAlignment="Stretch"
 				Command="{Binding MinimizeCommand}"
 				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-				Content="&#xE949;" />
+				Content="&#xE949;">
+				<units:TitleButton.Style>
+					<Style BasedOn="{StaticResource {x:Type units:TitleButton}}" TargetType="{x:Type units:TitleButton}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Type, ElementName=view}" Value="{x:Static const:TitleViewType.Message}">
+								<Setter Property="Visibility" Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</units:TitleButton.Style>
+			</units:TitleButton>
 			<units:TitleButton
+				x:Name="RestoreButton"
 				Grid.Row="0"
-				Width="36"
-				Height="36"
+				Width="45"
+				VerticalAlignment="Stretch"
 				Command="{Binding RestoreCommand}"
 				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-				Content="&#xE923;"
-				Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=WindowState, Converter={StaticResource RestoreBtnVisibilityConverter}}" />
+				Content="&#xE923;">
+				<units:TitleButton.Style>
+					<Style BasedOn="{StaticResource {x:Type units:TitleButton}}" TargetType="{x:Type units:TitleButton}">
+						<Setter Property="Visibility" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=WindowState, Converter={StaticResource RestoreBtnVisibilityConverter}}" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Type, ElementName=view}" Value="{x:Static const:TitleViewType.Message}">
+								<Setter Property="Visibility" Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</units:TitleButton.Style>
+			</units:TitleButton>
 			<units:TitleButton
+				x:Name="MaximizeButton"
 				Grid.Row="0"
-				Width="36"
-				Height="36"
+				Width="45"
+				VerticalAlignment="Stretch"
 				Command="{Binding MaximizeCommand}"
 				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-				Content="&#xE739;"
-				Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=WindowState, Converter={StaticResource MaximizeBtnVisibilityConverter}}" />
-			<units:TitleButton
+				Content="&#xE739;">
+				<units:TitleButton.Style>
+					<Style BasedOn="{StaticResource {x:Type units:TitleButton}}" TargetType="{x:Type units:TitleButton}">
+						<Setter Property="Visibility" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=WindowState, Converter={StaticResource MaximizeBtnVisibilityConverter}}" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Type, ElementName=view}" Value="{x:Static const:TitleViewType.Message}">
+								<Setter Property="Visibility" Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</units:TitleButton.Style>
+			</units:TitleButton>
+			<units:TitleCloseButton
 				Grid.Row="0"
-				Width="36"
-				Height="36"
+				Width="51"
+				VerticalAlignment="Stretch"
 				Command="{Binding CloseCommand}"
 				CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-				Content="&#xE106;" />
+				Content="&#xE106;"
+				ContentMargin="0 0 6 0" />
 		</StackPanel>
+		<Grid.Style>
+			<Style TargetType="{x:Type Grid}">
+				<Setter Property="Margin" Value="0" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Value="2">
+						<Setter Property="Height" Value="42" />
+						<Setter Property="Margin" Value="8,8,0,0" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+		</Grid.Style>
 	</Grid>
 </UserControl>
