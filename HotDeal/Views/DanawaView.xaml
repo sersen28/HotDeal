@@ -23,9 +23,10 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<StackPanel Grid.Row="1" Grid.Column="0">
+		<StackPanel Grid.Row="2" Grid.Column="0">
 			<TextBlock
 				Margin="0,16,0,0"
 				HorizontalAlignment="Center"
@@ -41,7 +42,7 @@
 				Fill="{StaticResource DefaultGradient}"
 				StrokeThickness="0" />
 		</StackPanel>
-		<StackPanel Grid.Row="1" Grid.Column="1">
+		<StackPanel Grid.Row="2" Grid.Column="1">
 			<TextBlock
 				Margin="0,16,0,0"
 				HorizontalAlignment="Center"
@@ -56,10 +57,9 @@
 				Margin="0,16,0,16"
 				Fill="{StaticResource DefaultGradient}"
 				StrokeThickness="0" />
-			<views:OrderButtonsView Margin="8,0,0,16" />
 		</StackPanel>
 		<ListView
-			Grid.Row="2"
+			Grid.Row="3"
 			Grid.Column="0"
 			d:ItemsSource="{d:SampleData ItemCount=5}"
 			Background="Transparent"
@@ -104,7 +104,7 @@
 			</ItemsControl.ItemTemplate>
 		</ListView>
 		<ListView
-			Grid.Row="2"
+			Grid.Row="3"
 			Grid.Column="1"
 			d:ItemsSource="{d:SampleData ItemCount=4}"
 			Background="Transparent"
@@ -152,8 +152,15 @@
 			Grid.Column="0"
 			Grid.ColumnSpan="2"
 			Visibility="{Binding Path=DataContext.IsShowPopup.Value, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:DanawaView}}, Converter={StaticResource BooleanToVisibilityRCoverter}}" />
+
+		<Rectangle
+			Grid.Row="1"
+			Grid.Column="0"
+			Grid.ColumnSpan="2"
+			Height="1"
+			Fill="{StaticResource DefaultSeperator}" />
 		<units:LoadingProgress
-			Grid.Row="2"
+			Grid.Row="3"
 			Grid.ColumnSpan="3"
 			DataContext="{Binding LoadingSequence.Value}"
 			Maximum="100"

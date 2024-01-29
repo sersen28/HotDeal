@@ -6,7 +6,7 @@
 	xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:prism="http://prismlibrary.com/"
-	Width="1600"
+	Width="1500"
 	Height="800"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	WindowStartupLocation="CenterScreen"
@@ -23,25 +23,30 @@
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="1" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" MinHeight="34" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
-			<ContentControl
-				Grid.Row="0"
-				Grid.ColumnSpan="2"
-				d:Height="34"
-				prism:RegionManager.RegionName="TitleRegion" />
+			<StackPanel Grid.Row="0" Grid.ColumnSpan="3">
+				<ContentControl d:Height="34" prism:RegionManager.RegionName="TitleRegion" />
+				<Rectangle Height="1" Fill="{StaticResource DefaultSeperator}" />
+			</StackPanel>
 			<ContentControl
 				Grid.Row="1"
 				Grid.Column="0"
 				d:Width="100"
 				prism:RegionManager.RegionName="MainMenuRegion" />
-			<ContentControl
+			<Rectangle
 				Grid.Row="1"
 				Grid.Column="1"
+				Width="1"
+				Fill="{StaticResource DefaultSeperator}" />
+			<ContentControl
+				Grid.Row="1"
+				Grid.Column="2"
 				prism:RegionManager.RegionName="ContentRegion" />
 		</Grid>
 	</Border>

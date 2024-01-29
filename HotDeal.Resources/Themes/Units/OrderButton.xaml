@@ -17,15 +17,17 @@
 
 
 	<Style TargetType="{x:Type units:OrderButton}">
+		<Setter Property="Cursor" Value="Hand" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type units:OrderButton}">
 					<Border
 						x:Name="border"
+						MinWidth="100"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
 						Background="{StaticResource MenuBackground}"
-						BorderBrush="{StaticResource DefaultForeground}"
-						BorderThickness="2"
-						CornerRadius="8">
+						BorderThickness="0">
 						<StackPanel VerticalAlignment="Center">
 							<TextBlock
 								x:Name="txt"
@@ -33,7 +35,7 @@
 								HorizontalAlignment="Center"
 								VerticalAlignment="Center"
 								FontFamily="{StaticResource NotoMedium}"
-								FontSize="14"
+								FontSize="16"
 								Foreground="{StaticResource DefaultForeground}"
 								Text="{TemplateBinding Content}"
 								TextAlignment="Center" />
@@ -43,7 +45,7 @@
 								HorizontalAlignment="Center"
 								VerticalAlignment="Center"
 								FontFamily="{StaticResource NotoRegular}"
-								FontSize="11"
+								FontSize="14"
 								Foreground="{StaticResource DefaultForeground}"
 								TextAlignment="Center" />
 						</StackPanel>
@@ -52,13 +54,10 @@
 						<Trigger Property="IsChecked" Value="True">
 							<Setter TargetName="txt" Property="Foreground" Value="{StaticResource DefaultPoint}" />
 							<Setter TargetName="order" Property="Foreground" Value="{StaticResource DefaultPoint}" />
-							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonMouseOver}" />
+							<Setter TargetName="border" Property="Background" Value="{StaticResource MenuMousePressed}" />
 						</Trigger>
 						<Trigger Property="IsMouseOver" Value="True">
-							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonMouseOver}" />
-						</Trigger>
-						<Trigger Property="IsPressed" Value="True">
-							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonMousePressed}" />
+							<Setter TargetName="border" Property="Background" Value="{StaticResource MenuMouseOver}" />
 						</Trigger>
 						<Trigger Property="IsAscending" Value="True">
 							<Setter TargetName="order" Property="Text" Value="오름차순 ▲" />

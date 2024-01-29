@@ -1,0 +1,66 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:resource="clr-namespace:HotDeal.Resources.Themes"
+	xmlns:system="clr-namespace:System;assembly=netstandard"
+	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units">
+	<ResourceDictionary.MergedDictionaries>
+		<resource:ThemeResolver>
+			<resource:ThemeResolver.Items>
+				<system:String>ColorDictionary</system:String>
+				<system:String>FontDictionary</system:String>
+			</resource:ThemeResolver.Items>
+		</resource:ThemeResolver>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style TargetType="{x:Type units:FilterRadioButton}">
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="Background" Value="{StaticResource MenuBackground}" />
+		<Setter Property="Foreground" Value="{StaticResource DefaultForeground}" />
+		<Setter Property="FontFamily" Value="{StaticResource NotoRegular}" />
+		<Setter Property="FontSize" Value="18" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type units:FilterRadioButton}">
+					<Grid>
+						<Border
+							x:Name="border"
+							Width="{TemplateBinding Width}"
+							Height="{TemplateBinding Height}"
+							Background="{TemplateBinding Background}">
+							<StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+								<Image
+									x:Name="Img"
+									Width="24"
+									VerticalAlignment="Center"
+									Source="{TemplateBinding NormalSource}" />
+								<TextBlock
+									Height="24"
+									Margin="8,0,0,5"
+									HorizontalAlignment="Left"
+									VerticalAlignment="Center"
+									FontFamily="{TemplateBinding FontFamily}"
+									FontSize="{TemplateBinding FontSize}"
+									Foreground="{TemplateBinding Foreground}"
+									Text="{TemplateBinding Content}"
+									TextWrapping="Wrap" />
+							</StackPanel>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter TargetName="border" Property="Background" Value="{StaticResource MenuMouseOver}" />
+						</Trigger>
+						<Trigger Property="IsChecked" Value="True">
+							<Setter Property="Background" Value="{StaticResource MenuMousePressed}" />
+							<Setter Property="Foreground" Value="{StaticResource DefaultPoint}" />
+							<Setter TargetName="Img" Property="Source" Value="{Binding CheckedSource, RelativeSource={RelativeSource AncestorType={x:Type units:FilterRadioButton}, Mode=FindAncestor}}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

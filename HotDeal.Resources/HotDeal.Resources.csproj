@@ -16,6 +16,16 @@
     <None Remove="Resources\Fonts\NotoSansKR-Regular.ttf" />
     <None Remove="Resources\Fonts\NotoSansKR-SemiBold.ttf" />
     <None Remove="Resources\Fonts\NotoSansKR-Thin.ttf" />
+    <None Remove="Resources\Images\icon_close.png" />
+    <None Remove="Resources\Images\icon_detail_checked.png" />
+    <None Remove="Resources\Images\icon_detail_normal.png" />
+    <None Remove="Resources\Images\icon_filter.png" />
+    <None Remove="Resources\Images\icon_list_checked.png" />
+    <None Remove="Resources\Images\icon_list_normal.png" />
+    <None Remove="Resources\Images\icon_refresh.png" />
+    <None Remove="Resources\Images\icon_shorts_checked.png" />
+    <None Remove="Resources\Images\icon_shorts_normal.png" />
+    <None Remove="Resources\Images\icon_submit.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +43,16 @@
     <Resource Include="Resources\Fonts\NotoSansKR-Regular.ttf" />
     <Resource Include="Resources\Fonts\NotoSansKR-SemiBold.ttf" />
     <Resource Include="Resources\Fonts\NotoSansKR-Thin.ttf" />
+    <Resource Include="Resources\Images\icon_close.png" />
+    <Resource Include="Resources\Images\icon_detail_checked.png" />
+    <Resource Include="Resources\Images\icon_detail_normal.png" />
+    <Resource Include="Resources\Images\icon_filter.png" />
+    <Resource Include="Resources\Images\icon_list_checked.png" />
+    <Resource Include="Resources\Images\icon_list_normal.png" />
+    <Resource Include="Resources\Images\icon_refresh.png" />
+    <Resource Include="Resources\Images\icon_shorts_checked.png" />
+    <Resource Include="Resources\Images\icon_shorts_normal.png" />
+    <Resource Include="Resources\Images\icon_submit.png" />
   </ItemGroup>
 
 </Project>

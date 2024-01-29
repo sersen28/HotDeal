@@ -1,11 +1,8 @@
 ﻿using HotDeal.Services;
-using Prism.Commands;
 using Prism.Mvvm;
 using Reactive.Bindings;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace HotDeal.ViewModels
 {

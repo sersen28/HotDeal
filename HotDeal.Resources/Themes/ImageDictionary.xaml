@@ -1,0 +1,45 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+	<BitmapImage
+		x:Key="icon_refresh"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_refresh.png" />
+	<BitmapImage
+		x:Key="icon_submit"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_submit.png" />
+	<BitmapImage
+		x:Key="icon_filter"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_filter.png" />
+	<BitmapImage
+		x:Key="icon_close"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_close.png" />
+	<BitmapImage
+		x:Key="icon_shorts_normal"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_shorts_normal.png" />
+	<BitmapImage
+		x:Key="icon_shorts_checked"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_shorts_checked.png" />
+	<BitmapImage
+		x:Key="icon_detail_normal"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_detail_normal.png" />
+	<BitmapImage
+		x:Key="icon_detail_checked"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_detail_checked.png" />
+	<BitmapImage
+		x:Key="icon_list_normal"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_list_normal.png" />
+	<BitmapImage
+		x:Key="icon_list_checked"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_list_checked.png" />
+</ResourceDictionary>
