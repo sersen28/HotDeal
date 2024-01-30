@@ -55,7 +55,6 @@
 				Margin="0,16,0,16"
 				Fill="{StaticResource DefaultGradient}"
 				StrokeThickness="0" />
-			<views:OrderButtonsView Margin="8,0,0,16" />
 		</StackPanel>
 		<ListView
 			Grid.Row="2"
