@@ -38,7 +38,6 @@ namespace HotDeal.ViewModels
 				{
 					this._webCrawlingService.AddItem(model);
 				}
-				model.IsAddedWishList.Value = !model.IsAddedWishList.Value;
 			});
 		}
 	}

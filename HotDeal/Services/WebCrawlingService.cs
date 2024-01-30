@@ -22,9 +22,7 @@ namespace HotDeal.Services
 		private readonly LayoutService _layoutService;
 		private CancellationTokenSource _token = new();
 
-		private Dictionary<WishlistModel, TMonModel> _modelDict = new();
-
-		public ReactiveCollection<WishlistModel> Wishlist { get; set; } = new();
+		public ReactiveCollection<TMonModel> Wishlist { get; set; } = new();
 
 		public ReactiveCollection<TMonModel> DanawaFilterItems { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> DanawaLoadingSequence { get; set; } = new();
@@ -370,12 +368,8 @@ namespace HotDeal.Services
 		
 		public void AddItem(TMonModel model)
 		{
-			var item = WishlistModel.Convert(model);
-			if (!_modelDict.ContainsKey(item))
-			{
-				Wishlist.AddOnScheduler(item);
-				_modelDict.Add(item, model);
-			}
+			Wishlist.AddOnScheduler(model);
+			model.IsAddedWishList.Value = true;
 		}
 
 		public void DeleteItem(TMonModel model)
@@ -384,17 +378,8 @@ namespace HotDeal.Services
 			if (item is not null)
 			{
 				Wishlist.RemoveOnScheduler(item);
-				_modelDict.Remove(item);
 			}
-		}
-
-		public void DeleteItem(WishlistModel model)
-		{
-			Wishlist.RemoveOnScheduler(model);
-			if (_modelDict.ContainsKey(model))
-			{
-				_modelDict[model].IsAddedWishList.Value = false;
-			}
+			model.IsAddedWishList.Value = false;
 		}
 	}
 }

@@ -16,28 +16,26 @@
 	</UserControl.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="40" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<StackPanel Grid.Row="0">
+		<Border
+			Grid.Row="0"
+			Background="{StaticResource SubTitleBackground}"
+			BorderBrush="{StaticResource DefaultSeperator}"
+			BorderThickness="1,0,1,1">
 			<TextBlock
-				Margin="0,16,0,0"
 				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
 				FontFamily="{StaticResource NotoMedium}"
 				FontSize="18"
 				Foreground="{StaticResource DefaultForeground}"
-				Text="찜 목록"
+				Text="장바구니"
 				TextAlignment="Center" />
-			<Rectangle
-				Width="300"
-				Height="5"
-				Margin="0,16,0,16"
-				Fill="{StaticResource DefaultGradient}"
-				StrokeThickness="0" />
-		</StackPanel>
+		</Border>
 		<ListView
 			Grid.Row="1"
 			Grid.Column="0"
@@ -56,9 +54,10 @@
 					<Setter Property="Template">
 						<Setter.Value>
 							<ControlTemplate TargetType="{x:Type ListBoxItem}">
-								<Grid x:Name="RootBorder" Margin="16,0,16,0">
+								<StackPanel x:Name="RootBorder" Margin="0">
 									<ContentPresenter />
-								</Grid>
+									<Rectangle Height="1" Fill="{StaticResource DefaultSeperator}" />
+								</StackPanel>
 								<ControlTemplate.Triggers>
 									<Trigger Property="IsMouseOver" Value="True">
 										<Setter TargetName="RootBorder" Property="Background" Value="TransParent" />

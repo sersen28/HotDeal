@@ -54,4 +54,8 @@
 		x:Key="icon_website"
 		PresentationOptions:Freeze="True"
 		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_website.png" />
+	<BitmapImage
+		x:Key="icon_delete"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_delete.png" />
 </ResourceDictionary>

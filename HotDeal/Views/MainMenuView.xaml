@@ -24,12 +24,14 @@
 				Content="티몬"
 				GroupName="MainMenuGroup" />
 		</StackPanel>
-		<StackPanel Grid.Column="0" VerticalAlignment="Bottom">
+		<StackPanel
+			Grid.Column="0"
+			Margin="0,0,0,50"
+			VerticalAlignment="Bottom">
 			<units:MenuButton
 				Command="{Binding WishlistCommand}"
 				Content="장바구니"
 				GroupName="MainMenuGroup" />
-			<units:MenuButton Content="환경설정" GroupName="MainMenuGroup" />
 		</StackPanel>
 	</Grid>
 </UserControl>

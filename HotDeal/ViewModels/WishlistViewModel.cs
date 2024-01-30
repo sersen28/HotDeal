@@ -11,10 +11,9 @@ namespace HotDeal.ViewModels
 	{
 		private readonly WebCrawlingService _webCrawlingService;
 
-		public ReadOnlyReactiveCollection<WishlistModel> Wishlist { get; set; }
-		public ReadOnlyReactiveCollection<TMonModel> test { get; set; }
+		public ReadOnlyReactiveCollection<TMonModel> Wishlist { get; set; }
 
-		public ReactiveCommand<WishlistModel> DeleteCommand { get; set; } = new();
+		public ReactiveCommand<TMonModel> DeleteCommand { get; set; } = new();
 
 		public WishlistViewModel(WebCrawlingService webCrawlingService)
         {

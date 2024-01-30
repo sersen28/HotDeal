@@ -42,7 +42,7 @@
 				TextAlignment="Center"
 				TextTrimming="CharacterEllipsis"
 				TextWrapping="Wrap" />
-			<Grid Grid.Column="2" Background="Transparent">
+			<Grid Grid.Column="2">
 				<Rectangle
 					Width="1"
 					HorizontalAlignment="Left"
