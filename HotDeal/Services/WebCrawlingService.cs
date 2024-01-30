@@ -347,18 +347,6 @@ namespace HotDeal.Services
 			return true;
 		}
 
-		private bool DanawaItemFilter(DanawaModel item)
-		{
-			var filter = this.UserFilter.Value;
-			if (item.Discount.Value < filter.Discount.Value
-				|| item.Price.Value < filter.MinimumPrice.Value
-				|| item.Price.Value > filter.MaximumPrice.Value)
-			{
-				return false;
-			}
-			return true;
-		}
-
 		private string ReplaceDescription(string description)
 		{
 			return description.Replace("<br>", "");
