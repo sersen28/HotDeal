@@ -1,22 +1,35 @@
 ﻿using HotDeal.Resources.Models;
 using Reactive.Bindings;
+using System.Configuration;
 
 namespace HotDeal.Services
 {
 	public class UserService
     {
-        public ReactiveProperty<HotDealFilter> UserFilter { get; set; } = new();
+        private readonly LayoutService _layoutService;
 
-        public UserService() 
-        {
-            UserFilter.Value = new();
-        }
+		public ReactiveProperty<HotDealFilter> UserFilter { get; set; } = new();
 
-        public void SetUserFilter(uint discount, ulong min, ulong max)
+		public UserService(LayoutService layoutService)
+		{
+			this._layoutService = layoutService;
+			UserFilter.Value = new();
+		}		
+
+		public void SetUserFilter(uint discount, ulong min, ulong max)
 		{
 			this.UserFilter.Value.MaximumPrice.Value = max;
 			this.UserFilter.Value.Discount.Value = discount;
 			this.UserFilter.Value.MinimumPrice.Value = min;
+
+			if (min > max)
+			{
+				_layoutService.ShowModalMessageBox(
+					title: "Warning",
+					message: "최소 가격이 최대 가격보다 큽니다.\n다시 확인해 주세요.",
+					type: Resources.Constants.MessageBoxType.Confirm
+				);
+			}
 		}
-    }
+	}
 }
