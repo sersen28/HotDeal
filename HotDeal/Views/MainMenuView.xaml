@@ -6,7 +6,10 @@
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
 	prism:ViewModelLocator.AutoWireViewModel="True">
 	<Grid MinWidth="200" Background="{StaticResource MenuBackground}">
-		<StackPanel Grid.Column="0" VerticalAlignment="top">
+		<StackPanel
+			Grid.Column="0"
+			Margin="0,40,0,0"
+			VerticalAlignment="top">
 			<units:MenuButton
 				Command="{Binding DanawaCommand}"
 				Content="다나와"

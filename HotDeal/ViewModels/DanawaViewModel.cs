@@ -10,7 +10,6 @@ namespace HotDeal.ViewModels
 	{
 		private readonly WebCrawlingService _webCrawlingService;
 		private readonly LayoutService _layoutService;
-		private readonly WishlistService _wishlistService;
 
 		public ReadOnlyReactiveCollection<TMonModel> DanawaFilterList { get; set; }
 
@@ -20,11 +19,10 @@ namespace HotDeal.ViewModels
 		public ReactiveCommand<string> HyperlinkCommand { get; set; } = new();
 		public ReactiveCommand<TMonModel> AddWishlistCommand { get; set; } = new();
 
-		public DanawaViewModel(WebCrawlingService webCrawlingService, LayoutService layoutService, WishlistService wishlistService)
+		public DanawaViewModel(WebCrawlingService webCrawlingService, LayoutService layoutService)
 		{
 			this._webCrawlingService = webCrawlingService;
 			this._layoutService = layoutService;
-			this._wishlistService = wishlistService;
 
 			this.LoadingSequence = _webCrawlingService.DanawaLoadingSequence.ToReadOnlyReactivePropertySlim();
 			this.IsLoading = _webCrawlingService.IsDanawaLoading.ToReadOnlyReactivePropertySlim();
@@ -32,8 +30,15 @@ namespace HotDeal.ViewModels
 
 			this.HyperlinkCommand.Subscribe(this._webCrawlingService.OpenHyperlink);
 			this.AddWishlistCommand.Subscribe(model => {
-				model.IsAddedWishList.Value = true;
-				this._wishlistService.AddItem(WishlistModel.Convert(model));
+				if (model.IsAddedWishList.Value)
+				{
+					this._webCrawlingService.DeleteItem(model);
+				}
+				else
+				{
+					this._webCrawlingService.AddItem(model);
+				}
+				model.IsAddedWishList.Value = !model.IsAddedWishList.Value;
 			});
 		}
 	}

@@ -36,8 +36,7 @@ namespace HotDeal.ViewModels
 
 		public ReactiveCommand SubmitCommand { get; set; } = new();
 		public ReactiveCommand PopupCommand { get; set; } = new();
-		public AsyncReactiveCommand RefreshCommand { get; set; } = new();
-		//public ReactiveCommand RefreshCommand { get; set; } = new();
+		public ReactiveCommand RefreshCommand { get; set; } = new();
 
 		public FilterSettingViewModel(UserService userService, LayoutService layoutService, WebCrawlingService webCrawlingService)
 		{
@@ -94,15 +93,7 @@ namespace HotDeal.ViewModels
 				}
 			});
 
-			//this.RefreshCommand.Subscribe(async () =>
-			//{
-			//	_webCrawlingService.SetDanawaHotDeal();
-			//});
-
-			this.RefreshCommand.Subscribe(async () =>
-			{
-				await Task.Run(_webCrawlingService.SetDanawaHotDeal);
-			});
+			this.RefreshCommand.Subscribe(this._webCrawlingService.Refresh);
 
 			Initialize();
 		}

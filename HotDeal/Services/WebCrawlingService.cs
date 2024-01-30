@@ -1,8 +1,10 @@
 ﻿using HotDeal.Resources.Models;
 using HotDeal.Views;
 using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V117.CSS;
 using Reactive.Bindings;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -20,6 +22,10 @@ namespace HotDeal.Services
 		private readonly LayoutService _layoutService;
 		private CancellationTokenSource _token = new();
 
+		private Dictionary<WishlistModel, TMonModel> _modelDict = new();
+
+		public ReactiveCollection<WishlistModel> Wishlist { get; set; } = new();
+
 		public ReactiveCollection<TMonModel> DanawaFilterItems { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> DanawaLoadingSequence { get; set; } = new();
 
@@ -33,6 +39,8 @@ namespace HotDeal.Services
 		public ReactivePropertySlim<bool> IsTMonLoading { get; set; } = new(true);
 		public ReactivePropertySlim<bool> IsGMarketLoading { get; set; } = new(true);
 
+
+
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
 		
 		public WebCrawlingService(UserService userService, LayoutService layoutService) 
@@ -45,7 +53,29 @@ namespace HotDeal.Services
 			this.TMonLoadingSequence.Value = new("Tmon\nLoading");
 			this.GmarketLoadingSequence.Value = new("GMarket\nLoading");
 
-			//InitializeList();
+			InitializeList();
+		}
+
+		private async void InitializeList()
+		{
+			this._layoutService.ChangeContentRegion("DanawaView");
+			await Task.Run(SetDanawaHotDeal);
+		}
+
+		public async void Refresh()
+		{
+			switch (this._layoutService.DisplayContentName)
+			{
+				case nameof(DanawaView):
+					await Task.Run(SetDanawaHotDeal);
+					break;
+				case nameof(TMonView):
+					await Task.Run(SetTmonHotDealList);
+					break;
+				case nameof(GMarketView):
+					await Task.Run(SetGmarketHotDeal);
+					break;
+			}
 		}
 
 		public void Cancel()
@@ -229,12 +259,6 @@ namespace HotDeal.Services
 		}
 		#endregion
 
-
-		private async void InitializeList()
-		{
-			await Task.Run(SetDanawaHotDeal);
-		}
-
 		public void SetTmonHotDealList()
 		{
 			var sequence = this.TMonLoadingSequence.Value;
@@ -342,6 +366,35 @@ namespace HotDeal.Services
 				.Replace("&gt;", ">")
 				.Replace("&amp;", "&")
 				.Replace("&quot;", "\"");
+		}
+		
+		public void AddItem(TMonModel model)
+		{
+			var item = WishlistModel.Convert(model);
+			if (!_modelDict.ContainsKey(item))
+			{
+				Wishlist.AddOnScheduler(item);
+				_modelDict.Add(item, model);
+			}
+		}
+
+		public void DeleteItem(TMonModel model)
+		{
+			var item = Wishlist.Where(x => x.Description.Value.Equals(model.Description.Value)).FirstOrDefault();
+			if (item is not null)
+			{
+				Wishlist.RemoveOnScheduler(item);
+				_modelDict.Remove(item);
+			}
+		}
+
+		public void DeleteItem(WishlistModel model)
+		{
+			Wishlist.RemoveOnScheduler(model);
+			if (_modelDict.ContainsKey(model))
+			{
+				_modelDict[model].IsAddedWishList.Value = false;
+			}
 		}
 	}
 }

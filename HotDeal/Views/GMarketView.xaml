@@ -30,7 +30,7 @@
 				FontFamily="{StaticResource NotoMedium}"
 				FontSize="18"
 				Foreground="{StaticResource DefaultForeground}"
-				Text="Danawa Hotdeal List"
+				Text="GMarket Hotdeal List"
 				TextAlignment="Center" />
 		</Border>
 		<ListView

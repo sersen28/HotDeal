@@ -13,7 +13,6 @@ namespace HotDeal.ViewModels
 	{
 		private readonly WebCrawlingService _webCrawlingService;
 		private readonly LayoutService _layoutService;
-		private readonly WishlistService _wishlistService;
 
 		public ReadOnlyReactiveCollection<TMonModel> DanawaFilterList { get; set; }
 
@@ -23,10 +22,9 @@ namespace HotDeal.ViewModels
 		public ReactiveCommand<string> HyperlinkCommand { get; set; } = new();
 		public ReactiveCommand<TMonModel> AddWishlistCommand { get; set; } = new();
 
-		public GMarketViewModel(WebCrawlingService webCrawlingService, LayoutService layoutService, WishlistService wishlistService)
+		public GMarketViewModel(WebCrawlingService webCrawlingService, LayoutService layoutService)
 		{
 			this._layoutService = layoutService;
-			this._wishlistService = wishlistService;
 			this._webCrawlingService = webCrawlingService;
 
 			this.LoadingSequence = _webCrawlingService.GmarketLoadingSequence.ToReadOnlyReactivePropertySlim();
@@ -35,7 +33,7 @@ namespace HotDeal.ViewModels
 
 			this.HyperlinkCommand.Subscribe(this._webCrawlingService.OpenHyperlink);
 			this.AddWishlistCommand.Subscribe(model => {
-				this._wishlistService.AddItem(WishlistModel.Convert(model));
+				this._webCrawlingService.AddItem(model);
 			});
 		}
 	}
