@@ -7,21 +7,6 @@
 	prism:ViewModelLocator.AutoWireViewModel="True">
 	<Grid MinWidth="200" Background="{StaticResource MenuBackground}">
 		<StackPanel Grid.Column="0" VerticalAlignment="top">
-			<Grid Grid.Row="0" Height="201">
-				<TextBlock
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"
-					FontFamily="{StaticResource NotoMedium}"
-					FontSize="24"
-					FontWeight="Medium"
-					Foreground="{StaticResource DefaultForeground}"
-					Text="HotDeal&#10;Finder"
-					TextAlignment="Center" />
-				<Rectangle
-					Height="1"
-					VerticalAlignment="Bottom"
-					Fill="{StaticResource DefaultSeperator}" />
-			</Grid>
 			<units:MenuButton
 				Command="{Binding DanawaCommand}"
 				Content="다나와"

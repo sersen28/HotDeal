@@ -63,7 +63,7 @@
 							<Track.Thumb>
 								<Thumb
 									x:Name="thumb"
-									Margin="2"
+									Margin="0"
 									Background="{StaticResource DefaultPoint}"
 									BorderThickness="0"
 									Style="{StaticResource ScrollBarThumb}" />
@@ -104,7 +104,7 @@
 						<ScrollBar
 							x:Name="PART_VerticalScrollBar"
 							Grid.Column="1"
-							Margin="0"
+							Margin="0,0,1,0"
 							AutomationProperties.AutomationId="VerticalScrollBar"
 							Cursor="Hand"
 							Maximum="{TemplateBinding ScrollableHeight}"

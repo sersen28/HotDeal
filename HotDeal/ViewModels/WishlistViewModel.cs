@@ -23,7 +23,6 @@ namespace HotDeal.ViewModels
 			this._webCrawlingService = webCrawlingService;
 
 			this.Wishlist = _wishlistService.Wishlist.ToReadOnlyReactiveCollection();
-			this.test = _webCrawlingService.DanawaItems.ToReadOnlyReactiveCollection();
 
 			this.DeleteCommand.Subscribe(this._wishlistService.DeleteItem);
 		}

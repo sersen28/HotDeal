@@ -6,7 +6,8 @@
 	xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:prism="http://prismlibrary.com/"
-	Width="1500"
+	xmlns:views="clr-namespace:HotDeal.Views"
+	Width="1300"
 	Height="800"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	WindowStartupLocation="CenterScreen"
@@ -28,25 +29,38 @@
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" MinHeight="34" />
+				<RowDefinition Height="1" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="1" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
-			<StackPanel Grid.Row="0" Grid.ColumnSpan="3">
-				<ContentControl d:Height="34" prism:RegionManager.RegionName="TitleRegion" />
-				<Rectangle Height="1" Fill="{StaticResource DefaultSeperator}" />
-			</StackPanel>
 			<ContentControl
+				Grid.Row="0"
+				Grid.ColumnSpan="4"
+				d:Height="34"
+				prism:RegionManager.RegionName="TitleRegion" />
+			<Rectangle
 				Grid.Row="1"
+				Grid.ColumnSpan="4"
+				Height="1"
+				Fill="{StaticResource DefaultSeperator}" />
+			<views:FilterSettingView
+				Grid.Row="2"
+				Grid.Column="0"
+				Grid.ColumnSpan="4" />
+			<Rectangle
+				Grid.Row="3"
+				Grid.ColumnSpan="4"
+				Height="1"
+				Fill="{StaticResource DefaultSeperator}" />
+			<ContentControl
+				Grid.Row="4"
 				Grid.Column="0"
 				d:Width="100"
 				prism:RegionManager.RegionName="MainMenuRegion" />
-			<Rectangle
-				Grid.Row="1"
-				Grid.Column="1"
-				Width="1"
-				Fill="{StaticResource DefaultSeperator}" />
 			<ContentControl
-				Grid.Row="1"
-				Grid.Column="2"
+				Grid.Row="4"
+				Grid.Column="3"
 				prism:RegionManager.RegionName="ContentRegion" />
 		</Grid>
 	</Border>

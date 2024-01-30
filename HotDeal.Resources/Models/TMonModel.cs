@@ -20,6 +20,7 @@ namespace HotDeal.Resources.Models
 
 		public ReactiveProperty<ulong?> Price { get; set; } = new();
 		public ReactiveProperty<ulong?> OriginalPrice { get; set; } = new();
+		public ReactiveProperty<bool> IsAddedWishList { get; set; } = new(false);
 
 		public TMonModel() { }
 

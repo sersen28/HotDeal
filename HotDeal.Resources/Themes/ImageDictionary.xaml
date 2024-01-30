@@ -42,4 +42,16 @@
 		x:Key="icon_list_checked"
 		PresentationOptions:Freeze="True"
 		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_list_checked.png" />
+	<BitmapImage
+		x:Key="icon_basket_normal"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_basket_normal.png" />
+	<BitmapImage
+		x:Key="icon_basket_checked"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_basket_checked.png" />
+	<BitmapImage
+		x:Key="icon_website"
+		PresentationOptions:Freeze="True"
+		UriSource="pack://application:,,,/HotDeal.Resources;component/Resources/Images/icon_website.png" />
 </ResourceDictionary>

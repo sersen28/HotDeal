@@ -13,99 +13,31 @@
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	mc:Ignorable="d">
 	<UserControl.Resources>
-		<cvt:BooleanToVisibilityRCoverter x:Key="BooleanToVisibilityRCoverter" />
+		<ResourceDictionary>
+			<cvt:BooleanToVisibilityRCoverter x:Key="BooleanToVisibilityRCoverter" />
+		</ResourceDictionary>
 	</UserControl.Resources>
 	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="40" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<StackPanel Grid.Row="2" Grid.Column="0">
+		<Border
+			Grid.Row="0"
+			Background="{StaticResource SubTitleBackground}"
+			BorderBrush="{StaticResource DefaultSeperator}"
+			BorderThickness="1,0,1,1">
 			<TextBlock
-				Margin="0,16,0,0"
 				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
 				FontFamily="{StaticResource NotoMedium}"
 				FontSize="18"
 				Foreground="{StaticResource DefaultForeground}"
-				Text="ALL"
+				Text="Danawa Hotdeal List"
 				TextAlignment="Center" />
-			<Rectangle
-				Width="300"
-				Height="5"
-				Margin="0,16,0,16"
-				Fill="{StaticResource DefaultGradient}"
-				StrokeThickness="0" />
-		</StackPanel>
-		<StackPanel Grid.Row="2" Grid.Column="1">
-			<TextBlock
-				Margin="0,16,0,0"
-				HorizontalAlignment="Center"
-				FontFamily="{StaticResource NotoMedium}"
-				FontSize="18"
-				Foreground="{StaticResource DefaultForeground}"
-				Text="FILTERED"
-				TextAlignment="Center" />
-			<Rectangle
-				Width="300"
-				Height="5"
-				Margin="0,16,0,16"
-				Fill="{StaticResource DefaultGradient}"
-				StrokeThickness="0" />
-		</StackPanel>
+		</Border>
 		<ListView
-			Grid.Row="3"
-			Grid.Column="0"
-			d:ItemsSource="{d:SampleData ItemCount=5}"
-			Background="Transparent"
-			BorderThickness="0"
-			FocusVisualStyle="{x:Null}"
-			IsEnabled="True"
-			IsTabStop="False"
-			ItemsSource="{Binding DanawaList}"
-			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-			ScrollViewer.VerticalScrollBarVisibility="Visible"
-			VirtualizingPanel.ScrollUnit="Pixel">
-			<ListView.ItemContainerStyle>
-				<Style TargetType="{x:Type ListViewItem}">
-					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-					<Setter Property="Template">
-						<Setter.Value>
-							<ControlTemplate TargetType="{x:Type ListBoxItem}">
-								<Grid x:Name="RootBorder" Margin="16,0,16,0">
-									<ContentPresenter />
-								</Grid>
-								<ControlTemplate.Triggers>
-									<Trigger Property="IsMouseOver" Value="True">
-										<Setter TargetName="RootBorder" Property="Background" Value="TransParent" />
-									</Trigger>
-								</ControlTemplate.Triggers>
-							</ControlTemplate>
-						</Setter.Value>
-					</Setter>
-				</Style>
-			</ListView.ItemContainerStyle>
-			<ListBox.Template>
-				<ControlTemplate>
-					<units:ListScrollViewer>
-						<ItemsPresenter />
-					</units:ListScrollViewer>
-				</ControlTemplate>
-			</ListBox.Template>
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<items:DanawaListItem />
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ListView>
-		<ListView
-			Grid.Row="3"
-			Grid.Column="1"
+			Grid.Row="1"
 			d:ItemsSource="{d:SampleData ItemCount=4}"
 			Background="Transparent"
 			BorderThickness="0"
@@ -121,9 +53,10 @@
 					<Setter Property="Template">
 						<Setter.Value>
 							<ControlTemplate TargetType="{x:Type ListBoxItem}">
-								<Grid x:Name="RootBorder" Margin="16,0,16,0">
+								<StackPanel x:Name="RootBorder" Margin="0">
 									<ContentPresenter />
-								</Grid>
+									<Rectangle Height="1" Fill="{StaticResource DefaultSeperator}" />
+								</StackPanel>
 								<ControlTemplate.Triggers>
 									<Trigger Property="IsMouseOver" Value="True">
 										<Setter TargetName="RootBorder" Property="Background" Value="TransParent" />
@@ -147,20 +80,8 @@
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ListView>
-		<views:FilterSettingView
-			Grid.Row="0"
-			Grid.Column="0"
-			Grid.ColumnSpan="2"
-			Visibility="{Binding Path=DataContext.IsShowPopup.Value, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:DanawaView}}, Converter={StaticResource BooleanToVisibilityRCoverter}}" />
-
-		<Rectangle
-			Grid.Row="1"
-			Grid.Column="0"
-			Grid.ColumnSpan="2"
-			Height="1"
-			Fill="{StaticResource DefaultSeperator}" />
 		<units:LoadingProgress
-			Grid.Row="3"
+			Grid.Row="2"
 			Grid.ColumnSpan="3"
 			DataContext="{Binding LoadingSequence.Value}"
 			Maximum="100"

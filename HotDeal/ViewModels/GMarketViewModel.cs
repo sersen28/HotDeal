@@ -12,19 +12,31 @@ namespace HotDeal.ViewModels
 	public class GMarketViewModel : BindableBase
 	{
 		private readonly WebCrawlingService _webCrawlingService;
+		private readonly LayoutService _layoutService;
+		private readonly WishlistService _wishlistService;
 
-		public ReadOnlyReactiveCollection<TMonModel> DanawaList { get; set; }
 		public ReadOnlyReactiveCollection<TMonModel> DanawaFilterList { get; set; }
 
 		public ReadOnlyReactivePropertySlim<bool> IsLoading { get; set; }
+		public ReadOnlyReactivePropertySlim<LoadingSequence> LoadingSequence { get; set; }
 
-		public GMarketViewModel(WebCrawlingService webCrawlingService)
+		public ReactiveCommand<string> HyperlinkCommand { get; set; } = new();
+		public ReactiveCommand<TMonModel> AddWishlistCommand { get; set; } = new();
+
+		public GMarketViewModel(WebCrawlingService webCrawlingService, LayoutService layoutService, WishlistService wishlistService)
 		{
+			this._layoutService = layoutService;
+			this._wishlistService = wishlistService;
 			this._webCrawlingService = webCrawlingService;
 
+			this.LoadingSequence = _webCrawlingService.GmarketLoadingSequence.ToReadOnlyReactivePropertySlim();
 			this.IsLoading = _webCrawlingService.IsGMarketLoading.ToReadOnlyReactivePropertySlim();
-			this.DanawaList = _webCrawlingService.GMarketItems.ToReadOnlyReactiveCollection();
 			this.DanawaFilterList = _webCrawlingService.GMarketFilterItems.ToReadOnlyReactiveCollection();
+
+			this.HyperlinkCommand.Subscribe(this._webCrawlingService.OpenHyperlink);
+			this.AddWishlistCommand.Subscribe(model => {
+				this._wishlistService.AddItem(WishlistModel.Convert(model));
+			});
 		}
 	}
 }

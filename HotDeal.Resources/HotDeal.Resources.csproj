@@ -16,6 +16,8 @@
     <None Remove="Resources\Fonts\NotoSansKR-Regular.ttf" />
     <None Remove="Resources\Fonts\NotoSansKR-SemiBold.ttf" />
     <None Remove="Resources\Fonts\NotoSansKR-Thin.ttf" />
+    <None Remove="Resources\Images\icon_basket_checked.png" />
+    <None Remove="Resources\Images\icon_basket_normal.png" />
     <None Remove="Resources\Images\icon_close.png" />
     <None Remove="Resources\Images\icon_detail_checked.png" />
     <None Remove="Resources\Images\icon_detail_normal.png" />
@@ -26,6 +28,7 @@
     <None Remove="Resources\Images\icon_shorts_checked.png" />
     <None Remove="Resources\Images\icon_shorts_normal.png" />
     <None Remove="Resources\Images\icon_submit.png" />
+    <None Remove="Resources\Images\icon_website.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +46,8 @@
     <Resource Include="Resources\Fonts\NotoSansKR-Regular.ttf" />
     <Resource Include="Resources\Fonts\NotoSansKR-SemiBold.ttf" />
     <Resource Include="Resources\Fonts\NotoSansKR-Thin.ttf" />
+    <Resource Include="Resources\Images\icon_basket_checked.png" />
+    <Resource Include="Resources\Images\icon_basket_normal.png" />
     <Resource Include="Resources\Images\icon_close.png" />
     <Resource Include="Resources\Images\icon_detail_checked.png" />
     <Resource Include="Resources\Images\icon_detail_normal.png" />
@@ -53,6 +58,7 @@
     <Resource Include="Resources\Images\icon_shorts_checked.png" />
     <Resource Include="Resources\Images\icon_shorts_normal.png" />
     <Resource Include="Resources\Images\icon_submit.png" />
+    <Resource Include="Resources\Images\icon_website.png" />
   </ItemGroup>
 
 </Project>

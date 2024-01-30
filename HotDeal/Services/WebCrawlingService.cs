@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace HotDeal.Services
 {
@@ -19,15 +20,14 @@ namespace HotDeal.Services
 		private readonly LayoutService _layoutService;
 		private CancellationTokenSource _token = new();
 
-		public ReactiveCollection<TMonModel> DanawaItems { get; set; } = new();
 		public ReactiveCollection<TMonModel> DanawaFilterItems { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> DanawaLoadingSequence { get; set; } = new();
 
-		public ReactiveCollection<TMonModel> TmonItems { get; set; } = new();
 		public ReactiveCollection<TMonModel> TmonFilterItems { get; set; } = new();
+		public ReactivePropertySlim<LoadingSequence> TMonLoadingSequence { get; set; } = new();
 
-		public ReactiveCollection<TMonModel> GMarketItems { get; set; } = new();
 		public ReactiveCollection<TMonModel> GMarketFilterItems { get; set; } = new();
+		public ReactivePropertySlim<LoadingSequence> GmarketLoadingSequence { get; set; } = new();
 
 		public ReactivePropertySlim<bool> IsDanawaLoading { get; set; } = new(true);
 		public ReactivePropertySlim<bool> IsTMonLoading { get; set; } = new(true);
@@ -42,6 +42,8 @@ namespace HotDeal.Services
 
 			this.UserFilter = this._userService.UserFilter.ToReadOnlyReactiveProperty();
 			this.DanawaLoadingSequence.Value = new("Danawa\nLoading");
+			this.TMonLoadingSequence.Value = new("Tmon\nLoading");
+			this.GmarketLoadingSequence.Value = new("GMarket\nLoading");
 
 			//InitializeList();
 		}
@@ -82,9 +84,8 @@ namespace HotDeal.Services
 		public void SetDanawaHotDeal()
 		{
 			var sequence = this.DanawaLoadingSequence.Value;
-
 			sequence.IsLoading.Value = true;
-			DanawaItems.ClearOnScheduler();
+
 			DanawaFilterItems.ClearOnScheduler();
 			using (var controller = new WebController())
 			{
@@ -105,7 +106,6 @@ namespace HotDeal.Services
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
 							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
-							this.DanawaItems.AddOnScheduler(item);
 							if (DanawaItemFilter(item))
 							{
 								this.DanawaFilterItems.AddOnScheduler(item);
@@ -145,24 +145,20 @@ namespace HotDeal.Services
 			}
 		}
 
-		private bool GetList(out ReactiveCollection<TMonModel> source, out ReactiveCollection<TMonModel> filtered)
+		private bool GetList(out ReactiveCollection<TMonModel> filtered)
 		{
 			switch (this._layoutService.DisplayContentName)
 			{
 				case nameof(DanawaView):
-					source = this.DanawaItems;
 					filtered = this.DanawaFilterItems;
 					break;
 				case nameof(TMonView):
-					source = this.TmonItems;
 					filtered = this.TmonFilterItems;
 					break;
 				case nameof(GMarketView):
-					source = this.GMarketItems;
 					filtered = this.GMarketFilterItems;
 					break;
 				default:
-					source = null;
 					filtered = null;
 					return false;
 			}
@@ -171,7 +167,7 @@ namespace HotDeal.Services
 
 		private void SortByPrice(bool isAscending)
 		{
-			if (!GetList(out var source, out var filtered))
+			if (!GetList(out var filtered))
 			{
 				return;
 			}
@@ -179,24 +175,20 @@ namespace HotDeal.Services
 			TMonModel[] src = null, ftd = null;
 			if (isAscending)
 			{
-				src = source.OrderBy(x => x.Price.Value).ToArray();
 				ftd = filtered.OrderBy(x => x.Price.Value).ToArray();
 			}
 			else
 			{
-				src = source.OrderByDescending(x => x.Price.Value).ToArray();
 				ftd = filtered.OrderByDescending(x => x.Price.Value).ToArray();
 			}
 
-			source.ClearOnScheduler();
 			filtered.ClearOnScheduler();
-			source.AddRangeOnScheduler(src);
 			filtered.AddRangeOnScheduler(ftd);
 		}
 
 		private void SortByPercent(bool isAscending)
 		{
-			if (!GetList(out var source, out var filtered))
+			if (!GetList(out var filtered))
 			{
 				return;
 			}
@@ -204,24 +196,20 @@ namespace HotDeal.Services
 			TMonModel[] src = null, ftd = null;
 			if (isAscending)
 			{
-				src = source.OrderBy(x => x.Discount.Value).ToArray();
 				ftd = filtered.OrderBy(x => x.Discount.Value).ToArray();
 			}
 			else
 			{
-				src = source.OrderByDescending(x => x.Discount.Value).ToArray();
 				ftd = filtered.OrderByDescending(x => x.Discount.Value).ToArray();
 			}
 
-			source.ClearOnScheduler();
 			filtered.ClearOnScheduler();
-			source.AddRangeOnScheduler(src);
 			filtered.AddRangeOnScheduler(ftd);
 		}
 
 		private void SortByDiscount(bool isAscending)
 		{
-			if (!GetList(out var source, out var filtered))
+			if (!GetList(out var filtered))
 			{
 				return;
 			}
@@ -229,18 +217,14 @@ namespace HotDeal.Services
 			TMonModel[] src = null, ftd = null;
 			if (isAscending)
 			{
-				src = source.OrderBy(x => x.Reduce.Value).ToArray();
 				ftd = filtered.OrderBy(x => x.Reduce.Value).ToArray();
 			}
 			else
 			{
-				src = source.OrderByDescending(x => x.Reduce.Value).ToArray();
 				ftd = filtered.OrderByDescending(x => x.Reduce.Value).ToArray();
 			}
 
-			source.ClearOnScheduler();
 			filtered.ClearOnScheduler();
-			source.AddRangeOnScheduler(src);
 			filtered.AddRangeOnScheduler(ftd);
 		}
 		#endregion
@@ -251,16 +235,17 @@ namespace HotDeal.Services
 			await Task.Run(SetDanawaHotDeal);
 		}
 
-		private void SetTmonHotDealList()
+		public void SetTmonHotDealList()
 		{
-			this.IsTMonLoading.Value = true;
-			ReadOnlyCollection<IWebElement> list;
+			var sequence = this.TMonLoadingSequence.Value;
+			sequence.IsLoading.Value = true;
 
+			TmonFilterItems.ClearOnScheduler();
 			using (var controller = new WebController())
 			{
 				controller.driver.Navigate().GoToUrl("https://www.tmon.co.kr/planning/PLAN_elVpHLluqf");
-				list = controller.driver.FindElements(By.XPath("//*[@id=\"planContent\"]/div/div/div[2]/div[2]/div/ul/li"));
-
+				var list = controller.driver.FindElements(By.XPath("//*[@id=\"planContent\"]/div/div/div[2]/div[2]/div/ul/li"));
+				sequence.Maximum.Value = list.Count;
 				foreach (var iter in list)
 				{
 					try
@@ -276,10 +261,9 @@ namespace HotDeal.Services
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
 							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
-							this.TmonItems.Add(item);
 							if (DanawaItemFilter(item))
 							{
-								this.TmonFilterItems.Add(item);
+								this.TmonFilterItems.AddOnScheduler(item);
 							}
 						}
 					}
@@ -288,19 +272,23 @@ namespace HotDeal.Services
 						Debug.WriteLine($"({nameof(SetGmarketHotDeal)})" + e.Message);
 						continue;
 					}
+					sequence.Current.Value++;
 				}
 			}
-
-			this.IsTMonLoading.Value = false;
+			sequence.Initialize();
 		}
 
-		private void SetGmarketHotDeal()
+		public void SetGmarketHotDeal()
 		{
-			this.IsGMarketLoading.Value = true;
+			var sequence = this.GmarketLoadingSequence.Value;
+			sequence.IsLoading.Value = true;
+
+			GMarketFilterItems.ClearOnScheduler();
 			using (var controller = new WebController())
 			{
 				controller.driver.Navigate().GoToUrl("https://www.gmarket.co.kr/n/superdeal");
 				var list = controller.driver.FindElements(By.XPath("//*[@id=\"container\"]/div[2]/ul/li"));
+				sequence.Maximum.Value = list.Count;
 				foreach (var iter in list)
 				{
 					try
@@ -318,10 +306,9 @@ namespace HotDeal.Services
 						if (ulong.TryParse(price_str, out var price) && uint.TryParse(discount_str, out var discount))
 						{
 							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
-							this.GMarketItems.Add(item);
 							if (DanawaItemFilter(item))
 							{
-								this.GMarketFilterItems.Add(item);
+								this.GMarketFilterItems.AddOnScheduler(item);
 							}
 						}
 					}
@@ -330,9 +317,10 @@ namespace HotDeal.Services
 						Debug.WriteLine($"({nameof(SetGmarketHotDeal)})" + e.Message);
 						continue;
 					}
+					sequence.Current.Value++;
 				}
 			}
-			this.IsGMarketLoading.Value = false;
+			sequence.Initialize();
 		}
 
 		private bool DanawaItemFilter(TMonModel item)
@@ -349,7 +337,11 @@ namespace HotDeal.Services
 
 		private string ReplaceDescription(string description)
 		{
-			return description.Replace("<br>", "");
+			return description.Replace("<br>", "\r\n")
+				.Replace("&lt;", "<")
+				.Replace("&gt;", ">")
+				.Replace("&amp;", "&")
+				.Replace("&quot;", "\"");
 		}
 	}
 }

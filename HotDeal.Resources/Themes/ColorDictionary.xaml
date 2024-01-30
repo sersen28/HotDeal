@@ -1,18 +1,35 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+	<!--  Renewal  -->
 	<SolidColorBrush x:Key="TitleBackground" Color="#252525" />
-	<SolidColorBrush x:Key="ItemBackground" Color="#444444" />
 
-	<SolidColorBrush x:Key="DefaultBackground" Color="#444444" />
-	<SolidColorBrush x:Key="DefaultBorderBrush" Color="#141414" />
+	<SolidColorBrush x:Key="MenuBackground" Color="#252525" />
+	<SolidColorBrush x:Key="MenuMouseOver" Color="#333333" />
+	<SolidColorBrush x:Key="MenuMousePressed" Color="#141414" />
+
 	<SolidColorBrush x:Key="DefaultForeground" Color="#f0f0f0" />
-	<SolidColorBrush x:Key="DarkForeground" Color="#aaaaaa" />
-
-	<SolidColorBrush x:Key="ButtonMouseOver" Color="#4e9f3d" />
-	<SolidColorBrush x:Key="ButtonMousePressed" Color="#1e5128" />
 
 	<SolidColorBrush x:Key="DefaultPoint" Color="#4e9f3d" />
 	<SolidColorBrush x:Key="DefaultPointDark" Color="#1e5128" />
+	<SolidColorBrush x:Key="DefaultSeperator" Color="#666666" />
+	<SolidColorBrush x:Key="DefaultBorderBrush" Color="#666666" />
+
+	<SolidColorBrush x:Key="EnableMask" Color="#f0252525" />
+
+	<SolidColorBrush x:Key="SubTitleBackground" Color="#363636" />
+	<SolidColorBrush x:Key="ListBackground" Color="#303030" />
+
+
+
+
+	<SolidColorBrush x:Key="ItemBackground" Color="#444444" />
+
+	<SolidColorBrush x:Key="DefaultBackground" Color="#404040" />
+	<SolidColorBrush x:Key="DarkForeground" Color="#aaaaaa" />
+
+	<SolidColorBrush x:Key="ButtonBright" Color="#9aeba3" />
+	<SolidColorBrush x:Key="ButtonMouseOver" Color="#4e9f3d" />
+	<SolidColorBrush x:Key="ButtonMousePressed" Color="#1e5128" />
 
 	<SolidColorBrush x:Key="MainColor1" Color="#f0f0f0" />
 	<SolidColorBrush x:Key="MainColor2" Color="#666666" />
@@ -21,9 +38,9 @@
 	<SolidColorBrush x:Key="MainColor5" Color="#141414" />
 
 
-	<SolidColorBrush x:Key="MenuBackground" Color="#252525" />
-	<SolidColorBrush x:Key="MenuMouseOver" Color="#333333" />
-	<SolidColorBrush x:Key="MenuMousePressed" Color="#303030" />
+
+
+
 	<SolidColorBrush x:Key="MenuSelected" Color="#444444" />
 
 	<SolidColorBrush x:Key="Divider" Color="#f0f0f0" />
