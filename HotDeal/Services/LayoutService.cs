@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace HotDeal.Services
 {
@@ -25,6 +26,7 @@ namespace HotDeal.Services
 		public LayoutService(IRegionManager regionManager) 
         {
 			this._regionManager = regionManager;
+			ChangeRegion("ContentRegion", nameof(DanawaView));
 		}
 
 		public void ChangeContentRegion(string viewName)

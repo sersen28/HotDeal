@@ -21,6 +21,7 @@ namespace HotDeal.Services
 			this.UserFilter.Value.MaximumPrice.Value = max;
 			this.UserFilter.Value.Discount.Value = discount;
 			this.UserFilter.Value.MinimumPrice.Value = min;
+			this.UserFilter.ForceNotify();
 
 			if (min > max)
 			{

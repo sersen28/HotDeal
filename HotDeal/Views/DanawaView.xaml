@@ -43,7 +43,7 @@
 			BorderThickness="0"
 			FocusVisualStyle="{x:Null}"
 			IsTabStop="False"
-			ItemsSource="{Binding DanawaFilterList}"
+			ItemsSource="{Binding ItemsSource}"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Visible"
 			VirtualizingPanel.ScrollUnit="Pixel">
@@ -55,7 +55,6 @@
 							<ControlTemplate TargetType="{x:Type ListBoxItem}">
 								<StackPanel x:Name="RootBorder" Margin="0">
 									<ContentPresenter />
-									<Rectangle Height="1" Fill="{StaticResource DefaultSeperator}" />
 								</StackPanel>
 								<ControlTemplate.Triggers>
 									<Trigger Property="IsMouseOver" Value="True">

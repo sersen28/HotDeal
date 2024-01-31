@@ -2,18 +2,14 @@
 using HotDeal.Resources.Models;
 using HotDeal.Views;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V117.CSS;
 using Reactive.Bindings;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace HotDeal.Services
 {
@@ -25,7 +21,7 @@ namespace HotDeal.Services
 
 		public ReactiveCollection<TMonModel> Wishlist { get; set; } = new();
 
-		public ReactiveCollection<TMonModel> DanawaFilterItems { get; set; } = new();
+		public ReactiveCollection<TMonModel> DanawaDatas { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> DanawaLoadingSequence { get; set; } = new();
 
 		public ReactiveCollection<TMonModel> TmonFilterItems { get; set; } = new();
@@ -34,14 +30,12 @@ namespace HotDeal.Services
 		public ReactiveCollection<TMonModel> GMarketFilterItems { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> GmarketLoadingSequence { get; set; } = new();
 
-		public ReactivePropertySlim<bool> IsDanawaLoading { get; set; } = new(true);
-		public ReactivePropertySlim<bool> IsTMonLoading { get; set; } = new(true);
-		public ReactivePropertySlim<bool> IsGMarketLoading { get; set; } = new(true);
-
-
-
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
-		
+		public ReactivePropertySlim<bool> AllowFilter { get; set; } = new(true);
+
+		bool? _isAscending = null;
+		string _ordered = string.Empty;
+
 		public WebCrawlingService(UserService userService, LayoutService layoutService) 
 		{
 			this._userService = userService;
@@ -53,6 +47,11 @@ namespace HotDeal.Services
 			this.GmarketLoadingSequence.Value = new("GMarket\nLoading");
 
 			InitializeList();
+		}
+
+		public void SwitchFilter()
+		{
+			this.AllowFilter.Value = !this.AllowFilter.Value;
 		}
 
 		private async void InitializeList()
@@ -115,7 +114,7 @@ namespace HotDeal.Services
 			var sequence = this.DanawaLoadingSequence.Value;
 			sequence.IsLoading.Value = true;
 
-			DanawaFilterItems.ClearOnScheduler();
+			DanawaDatas.ClearOnScheduler();
 			using (var controller = new WebController())
 			{
 				controller.driver.Navigate().GoToUrl("https://www.danawa.com");
@@ -135,10 +134,7 @@ namespace HotDeal.Services
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
 							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
-							if (DanawaItemFilter(item))
-							{
-								this.DanawaFilterItems.AddOnScheduler(item);
-							}
+							this.DanawaDatas.AddOnScheduler(item);
 						}
 					}
 					catch (Exception e)
@@ -155,11 +151,17 @@ namespace HotDeal.Services
 				}
 			}
 			sequence.Initialize();
+			if (this._isAscending is not null)
+			{
+				ListSort(_ordered, this._isAscending is true);
+			}
 		}
 
 		#region Sort
 		public void ListSort(string key, bool isAscending)
 		{
+			this._ordered = key;
+			this._isAscending = isAscending;
 			switch (key)
 			{
 				case "price":
@@ -179,7 +181,7 @@ namespace HotDeal.Services
 			switch (this._layoutService.DisplayContentName)
 			{
 				case nameof(DanawaView):
-					filtered = this.DanawaFilterItems;
+					filtered = this.DanawaDatas;
 					break;
 				case nameof(TMonView):
 					filtered = this.TmonFilterItems;
@@ -284,10 +286,8 @@ namespace HotDeal.Services
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
 							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
-							if (DanawaItemFilter(item))
-							{
-								this.TmonFilterItems.AddOnScheduler(item);
-							}
+
+							this.TmonFilterItems.AddOnScheduler(item);
 						}
 					}
 					catch (Exception e)
@@ -299,6 +299,10 @@ namespace HotDeal.Services
 				}
 			}
 			sequence.Initialize();
+			if (this._isAscending is not null)
+			{
+				ListSort(_ordered, this._isAscending is true);
+			}
 		}
 
 		public void SetGmarketHotDeal()
@@ -329,10 +333,7 @@ namespace HotDeal.Services
 						if (ulong.TryParse(price_str, out var price) && uint.TryParse(discount_str, out var discount))
 						{
 							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
-							if (DanawaItemFilter(item))
-							{
-								this.GMarketFilterItems.AddOnScheduler(item);
-							}
+							this.GMarketFilterItems.AddOnScheduler(item);
 						}
 					}
 					catch (Exception e)
@@ -344,18 +345,10 @@ namespace HotDeal.Services
 				}
 			}
 			sequence.Initialize();
-		}
-
-		private bool DanawaItemFilter(TMonModel item)
-		{
-			var filter = this.UserFilter.Value;
-			if (item.Discount.Value < filter.Discount.Value
-				|| item.Price.Value < filter.MinimumPrice.Value
-				|| item.Price.Value > filter.MaximumPrice.Value)
+			if (this._isAscending is not null)
 			{
-				return false;
+				ListSort(_ordered, this._isAscending is true);
 			}
-			return true;
 		}
 
 		private string ReplaceDescription(string description)

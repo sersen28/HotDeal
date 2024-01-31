@@ -43,28 +43,28 @@
 					<Style TargetType="{x:Type TextBlock}">
 						<Setter Property="Text" Value="필터 켜기" />
 						<Style.Triggers>
-							<DataTrigger Binding="{Binding UseFilter.Value}" Value="True">
+							<DataTrigger Binding="{Binding AllowFilter.Value}" Value="True">
 								<Setter Property="Text" Value="필터 끄기" />
 							</DataTrigger>
 						</Style.Triggers>
 					</Style>
 				</TextBlock.Style>
 			</TextBlock>
-			<CheckBox
+			<Button
 				Margin="0,16,0,0"
 				HorizontalAlignment="Center"
 				BorderThickness="0"
-				Cursor="Hand"
-				IsChecked="{Binding UseFilter.Value}">
-				<CheckBox.Template>
-					<ControlTemplate TargetType="{x:Type CheckBox}">
+				Command="{Binding FilterSwitchCommand}"
+				Cursor="Hand">
+				<Button.Template>
+					<ControlTemplate TargetType="{x:Type Button}">
 						<Border
 							Width="60"
 							Height="90"
 							BorderBrush="{StaticResource DefaultForeground}"
 							BorderThickness="2">
 							<Grid>
-								<Grid d:Visibility="Collapsed" Visibility="{Binding UseFilter.Value, Converter={StaticResource BooleanToVisibilityCoverter}}">
+								<Grid d:Visibility="Collapsed" Visibility="{Binding AllowFilter.Value, Converter={StaticResource BooleanToVisibilityCoverter}}">
 									<Grid.RowDefinitions>
 										<RowDefinition Height="*" />
 										<RowDefinition Height="*" />
@@ -85,7 +85,7 @@
 										Text="OFF"
 										TextAlignment="Center" />
 								</Grid>
-								<Grid d:Visibility="Visible" Visibility="{Binding UseFilter.Value, Converter={StaticResource BooleanToVisibilityRCoverter}}">
+								<Grid d:Visibility="Visible" Visibility="{Binding AllowFilter.Value, Converter={StaticResource BooleanToVisibilityRCoverter}}">
 									<Grid.RowDefinitions>
 										<RowDefinition Height="*" />
 										<RowDefinition Height="*" />
@@ -109,8 +109,8 @@
 							</Grid>
 						</Border>
 					</ControlTemplate>
-				</CheckBox.Template>
-			</CheckBox>
+				</Button.Template>
+			</Button>
 		</StackPanel>
 		<Rectangle
 			Grid.Column="1"
@@ -388,7 +388,7 @@
 				<Border
 					Grid.Column="0"
 					Background="{StaticResource EnableMask}"
-					Visibility="{Binding UseFilter.Value, Converter={StaticResource BooleanToVisibilityRCoverter}}" />
+					Visibility="{Binding AllowFilter.Value, Converter={StaticResource BooleanToVisibilityRCoverter}}" />
 				<Rectangle
 					Grid.Column="1"
 					Width="1"
@@ -504,7 +504,7 @@
 			Grid.Column="2"
 			Grid.ColumnSpan="3"
 			Background="{StaticResource EnableMask}"
-			Visibility="{Binding UseFilter.Value, Converter={StaticResource BooleanToVisibilityRCoverter}}">
+			Visibility="{Binding AllowFilter.Value, Converter={StaticResource BooleanToVisibilityRCoverter}}">
 			<TextBlock
 				HorizontalAlignment="Center"
 				VerticalAlignment="Center"

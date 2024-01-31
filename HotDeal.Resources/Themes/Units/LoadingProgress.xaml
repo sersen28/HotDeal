@@ -32,7 +32,6 @@
 						HorizontalAlignment="Stretch"
 						d:Visibility="Visible"
 						Background="{StaticResource ItemBackground}"
-						CornerRadius="12"
 						Visibility="{Binding IsLoading.Value, Converter={StaticResource BooleanToVisibilityCoverter}}">
 						<StackPanel
 							MaxWidth="700"

@@ -28,15 +28,14 @@ namespace HotDeal.ViewModels
 		public ReactiveProperty<ulong> MinimumPrice { get; set; } = new(0);
 		public ReactiveProperty<ulong> MaximumPrice { get; set; } = new(300000);
 
-		public ReactiveProperty<bool> UseFilter { get; set; } = new(true);
+		public ReadOnlyReactivePropertySlim<bool> AllowFilter { get; set; }
 
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
-
 		public ReactiveCommand<string> ShowFilterCommand { get; set; } = new();
 
 		public ReactiveCommand SubmitCommand { get; set; } = new();
-		public ReactiveCommand PopupCommand { get; set; } = new();
 		public ReactiveCommand RefreshCommand { get; set; } = new();
+		public ReactiveCommand FilterSwitchCommand { get; set; } = new();
 
 		public FilterSettingViewModel(UserService userService, LayoutService layoutService, WebCrawlingService webCrawlingService)
 		{
@@ -45,12 +44,9 @@ namespace HotDeal.ViewModels
 			this._webCrawlingService = webCrawlingService;
 
 			this.UserFilter = this._UserService.UserFilter.ToReadOnlyReactiveProperty();
+			this.AllowFilter = this._webCrawlingService.AllowFilter.ToReadOnlyReactivePropertySlim();
 
-
-			this.PopupCommand.Subscribe(() =>
-			{
-				_layoutService.ShowPopupWindow();
-			});
+			this.FilterSwitchCommand.Subscribe(this._webCrawlingService.SwitchFilter);
 
 			this.SubmitCommand.Subscribe(() =>
 			{

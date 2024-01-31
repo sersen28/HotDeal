@@ -40,7 +40,7 @@
 			BorderThickness="0"
 			FocusVisualStyle="{x:Null}"
 			IsTabStop="False"
-			ItemsSource="{Binding DanawaFilterList}"
+			ItemsSource="{Binding ItemsSource}"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Visible"
 			VirtualizingPanel.ScrollUnit="Pixel">
