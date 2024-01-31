@@ -71,8 +71,15 @@ namespace HotDeal.Items
 			DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
 		}
 
+		private void OK(object sender, RoutedEventArgs e)
+		{
+			this.DialogResult = true;
+			SystemCommands.CloseWindow(this);
+		}
+
 		private void Cancel(object sender, RoutedEventArgs e)
 		{
+			this.DialogResult = false;
 			SystemCommands.CloseWindow(this);
 		}
 	}

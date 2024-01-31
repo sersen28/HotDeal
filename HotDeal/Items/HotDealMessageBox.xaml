@@ -39,7 +39,7 @@
 			<Grid Grid.Row="2" Margin="16,0,16,16">
 				<Button
 					Width="140"
-					Click="Cancel"
+					Click="OK"
 					Content="확인">
 					<Button.Style>
 						<Style TargetType="{x:Type Button}">
@@ -83,7 +83,7 @@
 					<Button
 						Width="140"
 						Margin="0,0,16,0"
-						Click="Cancel">
+						Click="OK">
 						<Button.Style>
 							<Style TargetType="{x:Type Button}">
 								<Setter Property="Content" Value="확인" />

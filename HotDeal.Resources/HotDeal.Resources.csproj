@@ -19,6 +19,7 @@
     <None Remove="Resources\Images\icon_basket_checked.png" />
     <None Remove="Resources\Images\icon_basket_normal.png" />
     <None Remove="Resources\Images\icon_close.png" />
+    <None Remove="Resources\Images\icon_delete.png" />
     <None Remove="Resources\Images\icon_detail_checked.png" />
     <None Remove="Resources\Images\icon_detail_normal.png" />
     <None Remove="Resources\Images\icon_filter.png" />
@@ -49,6 +50,7 @@
     <Resource Include="Resources\Images\icon_basket_checked.png" />
     <Resource Include="Resources\Images\icon_basket_normal.png" />
     <Resource Include="Resources\Images\icon_close.png" />
+    <Resource Include="Resources\Images\icon_delete.png" />
     <Resource Include="Resources\Images\icon_detail_checked.png" />
     <Resource Include="Resources\Images\icon_detail_normal.png" />
     <Resource Include="Resources\Images\icon_filter.png" />

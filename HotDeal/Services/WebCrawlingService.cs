@@ -1,4 +1,5 @@
-﻿using HotDeal.Resources.Models;
+﻿using HotDeal.Resources.Constants;
+using HotDeal.Resources.Models;
 using HotDeal.Views;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V117.CSS;
@@ -374,6 +375,13 @@ namespace HotDeal.Services
 
 		public void DeleteItem(TMonModel model)
 		{
+
+			if (this._layoutService.ShowModalMessageBox("Warning", "정말로 삭제하시겠습니까?", MessageBoxType.ConfirmOrCancel) is false)
+			{
+				return;
+			}
+
+
 			var item = Wishlist.Where(x => x.Description.Value.Equals(model.Description.Value)).FirstOrDefault();
 			if (item is not null)
 			{

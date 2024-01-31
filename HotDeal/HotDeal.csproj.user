@@ -7,15 +7,30 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Items\HotDealMessageBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Items\WishlistItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DanawaView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\TitleView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\WishlistView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Items\DanawaListItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Items\HotDealMessageBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Items\WishlistItem.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DanawaView.xaml">
@@ -25,6 +40,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\TitleView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\WishlistView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

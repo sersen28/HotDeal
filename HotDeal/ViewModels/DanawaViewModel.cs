@@ -1,4 +1,5 @@
-﻿using HotDeal.Resources.Models;
+﻿using HotDeal.Resources.Constants;
+using HotDeal.Resources.Models;
 using HotDeal.Services;
 using Prism.Mvvm;
 using Reactive.Bindings;
