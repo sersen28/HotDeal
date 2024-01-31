@@ -31,7 +31,6 @@ namespace HotDeal
 			containerRegistry.RegisterSingleton<WebCrawlingService>();
 			containerRegistry.RegisterSingleton<UserService>();
 			containerRegistry.RegisterSingleton<LayoutService>();
-			containerRegistry.RegisterSingleton<WishlistService>();
 		}
 
 		public void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
