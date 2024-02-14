@@ -314,7 +314,7 @@ namespace HotDeal.Services
 			using (var controller = new WebController())
 			{
 				controller.driver.Navigate().GoToUrl("https://www.gmarket.co.kr/n/superdeal");
-				var list = controller.driver.FindElements(By.XPath("//*[@id=\"container\"]/div[2]/ul/li"));
+				var list = controller.driver.FindElements(By.XPath("//*[@id=\"container\"]/div[2]/ul/div/div/li"));
 				sequence.Maximum.Value = list.Count;
 				foreach (var iter in list)
 				{
