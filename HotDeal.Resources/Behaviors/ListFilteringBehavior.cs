@@ -63,14 +63,14 @@ namespace HotDeal.Resources.Behaviors
 
 
 		public static readonly DependencyProperty DataProperty =
-			DependencyProperty.Register("Data", typeof(TMonModel), typeof(ListFilteringBehavior),
+			DependencyProperty.Register("Data", typeof(HotDealModel), typeof(ListFilteringBehavior),
 			new FrameworkPropertyMetadata(OnPropertyChanged));
 
-		public TMonModel Data
+		public HotDealModel Data
 		{
 			get
 			{
-				return (TMonModel)GetValue(DataProperty);
+				return (HotDealModel)GetValue(DataProperty);
 			}
 			set
 			{
@@ -143,7 +143,7 @@ namespace HotDeal.Resources.Behaviors
 			var minPrice = (ulong)GetValue(MinPriceProperty);
 			var maxPrice = (ulong)GetValue(MaxPriceProperty);
 			var discount = (uint)GetValue(DiscountProperty);
-			var data = (TMonModel)GetValue(DataProperty);
+			var data = (HotDealModel)GetValue(DataProperty);
 
 			if (data is null) return;
 

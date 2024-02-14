@@ -3,21 +3,14 @@ using HotDeal.Services;
 using Prism.Mvvm;
 using Prism.Regions;
 using Reactive.Bindings;
-using System.Threading.Tasks;
 using System;
 using System.Diagnostics;
-using HotDeal.Resources.Properties;
-using System.Globalization;
-using System.Threading;
-using System.Windows.Markup;
-using System.Windows;
-using HotDeal.Views;
 
 namespace HotDeal.ViewModels
 {
 	public class FilterSettingViewModel : BindableBase, INavigationAware
 	{
-		private readonly UserService _UserService;
+		private readonly FilterService _UserService;
 		private readonly LayoutService _layoutService;
 		private readonly WebCrawlingService _webCrawlingService;
 
@@ -44,7 +37,7 @@ namespace HotDeal.ViewModels
 		public ReactiveCommand RefreshCommand { get; set; } = new();
 		public ReactiveCommand FilterSwitchCommand { get; set; } = new();
 
-		public FilterSettingViewModel(UserService userService, LayoutService layoutService, WebCrawlingService webCrawlingService)
+		public FilterSettingViewModel(FilterService userService, LayoutService layoutService, WebCrawlingService webCrawlingService)
 		{
 			this._UserService = userService;
 			this._layoutService = layoutService;

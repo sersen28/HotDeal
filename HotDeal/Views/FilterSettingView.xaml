@@ -6,7 +6,6 @@
 	xmlns:cvt="clr-namespace:HotDeal.Resources.Converters;assembly=HotDeal.Resources"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-	xmlns:lc="clr-namespace:HotDeal.Resources.Properties;assembly=HotDeal.Resources"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:prism="http://prismlibrary.com/"
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
@@ -146,7 +145,7 @@
 						FontSize="14"
 						IsSnapToTickEnabled="True"
 						LargeChange="100"
-						Maximum="100"
+						Maximum="95"
 						Minimum="0"
 						SmallChange="5"
 						TickFrequency="5"
@@ -369,7 +368,7 @@
 										FontFamily="{StaticResource NotoMedium}"
 										FontSize="18"
 										Foreground="{StaticResource DefaultForeground}"
-										Text="제출"
+										Text="필터 적용"
 										TextAlignment="Center" />
 								</StackPanel>
 							</Border>
@@ -498,7 +497,7 @@
 										FontFamily="{StaticResource NotoRegular}"
 										FontSize="18"
 										Foreground="{StaticResource DefaultForeground}"
-										Text="정보 보기"
+										Text="개발 정보 보기"
 										TextAlignment="Center"
 										TextWrapping="Wrap" />
 								</StackPanel>

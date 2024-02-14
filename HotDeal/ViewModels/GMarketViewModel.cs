@@ -16,12 +16,12 @@ namespace HotDeal.ViewModels
 		private readonly WebCrawlingService _webCrawlingService;
 		private readonly LayoutService _layoutService;
 
-		public ReadOnlyReactiveCollection<TMonModel> ItemsSource { get; set; }
+		public ReadOnlyReactiveCollection<HotDealModel> ItemsSource { get; set; }
 
 		public ReadOnlyReactivePropertySlim<LoadingSequence> LoadingSequence { get; set; }
 
 		public ReactiveCommand<string> HyperlinkCommand { get; set; } = new();
-		public ReactiveCommand<TMonModel> AddWishlistCommand { get; set; } = new();
+		public ReactiveCommand<HotDealModel> AddWishlistCommand { get; set; } = new();
 
 		public GMarketViewModel(WebCrawlingService webCrawlingService, LayoutService layoutService)
 		{

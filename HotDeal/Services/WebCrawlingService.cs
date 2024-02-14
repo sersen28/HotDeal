@@ -15,19 +15,19 @@ namespace HotDeal.Services
 {
 	public class WebCrawlingService 
 	{
-		private readonly UserService _userService;
+		private readonly FilterService _userService;
 		private readonly LayoutService _layoutService;
 		private CancellationTokenSource _token = new();
 
-		public ReactiveCollection<TMonModel> Wishlist { get; set; } = new();
+		public ReactiveCollection<HotDealModel> Wishlist { get; set; } = new();
 
-		public ReactiveCollection<TMonModel> DanawaDatas { get; set; } = new();
+		public ReactiveCollection<HotDealModel> DanawaDatas { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> DanawaLoadingSequence { get; set; } = new();
 
-		public ReactiveCollection<TMonModel> TmonFilterItems { get; set; } = new();
+		public ReactiveCollection<HotDealModel> TmonFilterItems { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> TMonLoadingSequence { get; set; } = new();
 
-		public ReactiveCollection<TMonModel> GMarketFilterItems { get; set; } = new();
+		public ReactiveCollection<HotDealModel> GMarketFilterItems { get; set; } = new();
 		public ReactivePropertySlim<LoadingSequence> GmarketLoadingSequence { get; set; } = new();
 
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
@@ -36,7 +36,7 @@ namespace HotDeal.Services
 		bool? _isAscending = null;
 		string _ordered = string.Empty;
 
-		public WebCrawlingService(UserService userService, LayoutService layoutService) 
+		public WebCrawlingService(FilterService userService, LayoutService layoutService) 
 		{
 			this._userService = userService;
 			this._layoutService = layoutService;
@@ -133,7 +133,7 @@ namespace HotDeal.Services
 
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
-							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
+							var item = new HotDealModel(ReplaceDescription(description), price, discount, img, hyperlink);
 							this.DanawaDatas.AddOnScheduler(item);
 						}
 					}
@@ -176,7 +176,7 @@ namespace HotDeal.Services
 			}
 		}
 
-		private bool GetList(out ReactiveCollection<TMonModel> filtered)
+		private bool GetList(out ReactiveCollection<HotDealModel> filtered)
 		{
 			switch (this._layoutService.DisplayContentName)
 			{
@@ -203,7 +203,7 @@ namespace HotDeal.Services
 				return;
 			}
 
-			TMonModel[] src = null, ftd = null;
+			HotDealModel[] src = null, ftd = null;
 			if (isAscending)
 			{
 				ftd = filtered.OrderBy(x => x.Price.Value).ToArray();
@@ -224,7 +224,7 @@ namespace HotDeal.Services
 				return;
 			}
 
-			TMonModel[] src = null, ftd = null;
+			HotDealModel[] src = null, ftd = null;
 			if (isAscending)
 			{
 				ftd = filtered.OrderBy(x => x.Discount.Value).ToArray();
@@ -245,7 +245,7 @@ namespace HotDeal.Services
 				return;
 			}
 
-			TMonModel[] src = null, ftd = null;
+			HotDealModel[] src = null, ftd = null;
 			if (isAscending)
 			{
 				ftd = filtered.OrderBy(x => x.Reduce.Value).ToArray();
@@ -285,7 +285,7 @@ namespace HotDeal.Services
 
 						if (ulong.TryParse(price_str.Replace(",", ""), out var price) && uint.TryParse(discount_str.Replace(",", ""), out var discount))
 						{
-							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
+							var item = new HotDealModel(ReplaceDescription(description), price, discount, img, hyperlink);
 
 							this.TmonFilterItems.AddOnScheduler(item);
 						}
@@ -332,7 +332,7 @@ namespace HotDeal.Services
 
 						if (ulong.TryParse(price_str, out var price) && uint.TryParse(discount_str, out var discount))
 						{
-							var item = new TMonModel(ReplaceDescription(description), price, discount, img, hyperlink);
+							var item = new HotDealModel(ReplaceDescription(description), price, discount, img, hyperlink);
 							this.GMarketFilterItems.AddOnScheduler(item);
 						}
 					}
@@ -360,13 +360,13 @@ namespace HotDeal.Services
 				.Replace("&quot;", "\"");
 		}
 		
-		public void AddItem(TMonModel model)
+		public void AddItem(HotDealModel model)
 		{
 			Wishlist.AddOnScheduler(model);
 			model.IsAddedWishList.Value = true;
 		}
 
-		public void DeleteItem(TMonModel model)
+		public void DeleteItem(HotDealModel model)
 		{
 
 			if (this._layoutService.ShowModalMessageBox("Warning", "정말로 삭제하시겠습니까?", MessageBoxType.ConfirmOrCancel) is false)

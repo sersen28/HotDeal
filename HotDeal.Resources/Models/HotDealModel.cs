@@ -1,16 +1,11 @@
 ﻿using Reactive.Bindings;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace HotDeal.Resources.Models
 {
-	public class TMonModel
+	public class HotDealModel
 	{
 		public ReactiveProperty<string?> Description { get; set; } = new();
 		public ReactiveProperty<uint?> Discount { get; set; } = new();
@@ -22,9 +17,9 @@ namespace HotDeal.Resources.Models
 		public ReactiveProperty<ulong?> OriginalPrice { get; set; } = new();
 		public ReactiveProperty<bool> IsAddedWishList { get; set; } = new(false);
 
-		public TMonModel() { }
+		public HotDealModel() { }
 
-		public TMonModel(string description, ulong price, uint discount, string imgSource, string hyperlink)
+		public HotDealModel(string description, ulong price, uint discount, string imgSource, string hyperlink)
 		{
 			this.Description.Value = description;
 			this.Price.Value = price;
@@ -38,7 +33,7 @@ namespace HotDeal.Resources.Models
 			this.Reduce.Value = this.OriginalPrice.Value - this.Price.Value;
 		}
 
-		public TMonModel(string description, ulong price, ulong original, uint discount, string imgSource, string hyperlink)
+		public HotDealModel(string description, ulong price, ulong original, uint discount, string imgSource, string hyperlink)
 		{
 			this.Description.Value = description;
 			this.Price.Value = price;
