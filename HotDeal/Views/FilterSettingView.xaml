@@ -6,6 +6,7 @@
 	xmlns:cvt="clr-namespace:HotDeal.Resources.Converters;assembly=HotDeal.Resources"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+	xmlns:lc="clr-namespace:HotDeal.Resources.Properties;assembly=HotDeal.Resources"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:prism="http://prismlibrary.com/"
 	xmlns:units="clr-namespace:HotDeal.Resources.UI.Units;assembly=HotDeal.Resources"
@@ -474,36 +475,49 @@
 			Width="1"
 			Fill="{StaticResource DefaultSeperator}" />
 		<Grid Grid.Column="8">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<units:FilterRadioButton
-				Grid.Row="1"
+			<Button
+				Grid.Row="0"
 				Width="200"
-				CheckedSource="{StaticResource icon_list_checked}"
-				Content="기본"
-				IsChecked="True"
-				NormalSource="{StaticResource icon_list_normal}" />
-			<units:FilterRadioButton
-				Grid.Row="2"
-				Width="200"
-				CheckedSource="{StaticResource icon_detail_checked}"
-				Content="자세히"
-				NormalSource="{StaticResource icon_detail_normal}" />
-			<units:FilterRadioButton
-				Grid.Row="3"
-				Width="200"
-				CheckedSource="{StaticResource icon_shorts_checked}"
-				Content="간략히"
-				NormalSource="{StaticResource icon_shorts_normal}" />
+				Command="{Binding InformationCommand}"
+				CommandParameter="kor">
+				<Button.Template>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<Border x:Name="border" Background="{StaticResource MenuBackground}">
+								<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+									<Image
+										x:Name="Img"
+										Width="50"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Top"
+										Source="{StaticResource icon_detail_normal}" />
+									<TextBlock
+										Margin="0,18,0,0"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Top"
+										FontFamily="{StaticResource NotoRegular}"
+										FontSize="18"
+										Foreground="{StaticResource DefaultForeground}"
+										Text="정보 보기"
+										TextAlignment="Center"
+										TextWrapping="Wrap" />
+								</StackPanel>
+							</Border>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="border" Property="Background" Value="{StaticResource MenuMouseOver}" />
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
 		</Grid>
 		<Border
 			Grid.Column="2"
 			Grid.ColumnSpan="3"
 			Background="{StaticResource EnableMask}"
+			Cursor=""
 			Visibility="{Binding AllowFilter.Value, Converter={StaticResource BooleanToVisibilityRCoverter}}">
 			<TextBlock
 				HorizontalAlignment="Center"

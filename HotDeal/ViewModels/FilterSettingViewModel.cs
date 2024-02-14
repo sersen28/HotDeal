@@ -6,6 +6,12 @@ using Reactive.Bindings;
 using System.Threading.Tasks;
 using System;
 using System.Diagnostics;
+using HotDeal.Resources.Properties;
+using System.Globalization;
+using System.Threading;
+using System.Windows.Markup;
+using System.Windows;
+using HotDeal.Views;
 
 namespace HotDeal.ViewModels
 {
@@ -32,6 +38,7 @@ namespace HotDeal.ViewModels
 
 		public ReadOnlyReactiveProperty<HotDealFilter> UserFilter { get; set; }
 		public ReactiveCommand<string> ShowFilterCommand { get; set; } = new();
+		public ReactiveCommand<string> InformationCommand { get; set; } = new();
 
 		public ReactiveCommand SubmitCommand { get; set; } = new();
 		public ReactiveCommand RefreshCommand { get; set; } = new();
@@ -55,6 +62,10 @@ namespace HotDeal.ViewModels
 					min: this.MinimumPrice.Value,
 					max: this.MaximumPrice.Value
 				);
+			});
+
+			this.InformationCommand.Subscribe(language => {
+				this._layoutService.ShowPopupWindow();
 			});
 
 			this.OrderCommand.Subscribe((object param) => {
